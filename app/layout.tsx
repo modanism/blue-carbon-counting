@@ -2,12 +2,20 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
-import { config } from '@fortawesome/fontawesome-svg-core'
-import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { Providers } from "./provider";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
 
-config.autoAddCss = false
+library.add(fas);
 
-const plus_jakarta_sans = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap" });
+config.autoAddCss = false;
+
+const plus_jakarta_sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,12 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={plus_jakarta_sans.className}>
-        <Navbar />
-        {children}
-        </body>
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
-// npm i --save @fortawesome/fontawesome-svg-core
-// npm install --save @fortawesome/free-solid-svg-icons
-// npm install --save @fortawesome/react-fontawesome

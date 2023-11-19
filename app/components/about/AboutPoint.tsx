@@ -1,8 +1,5 @@
-import { IconName, library } from "@fortawesome/fontawesome-svg-core";
-import { fas, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { IconName } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-library.add(fas);
 
 type AboutPointProps = {
   title: string;
@@ -15,7 +12,7 @@ function AboutPoint(props: AboutPointProps) {
     <>
       <div className="flex justify-between items-start gap-[25px]">
         <div className="bg-[#C4C4C4] rounded-[10px] py-[12px] px-[13px]">
-          <FontAwesomeIcon icon={["fas", props.iconName as IconName]} size="lg" />
+          <FontAwesomeIcon icon={["fas", props.iconName as IconName]} size="lg" color="white"/>
         </div>
         <div className="flex flex-col gap-[5px]">
           <h1 className="text-[#1A202C] text-[22px] font-semibold">

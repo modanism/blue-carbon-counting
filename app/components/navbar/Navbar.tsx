@@ -9,7 +9,7 @@ const Navbar = () => {
     const pathname = usePathname()
 
   return (
-    <nav className="bg-white flex flex-col gap-[20px] justify-center items-center py-[25px] shadow-lg fixed w-full">
+    <nav className="bg-white flex flex-col gap-[20px] justify-center items-center py-[25px] shadow-lg fixed w-full z-[100]">
       <Image alt="logo" src={Logo} />
       <div className="flex gap-[48px]">
         <a href="/" className={`text-neutral-10 text-[16px] cursor-pointer ${pathname == '/' ? "border-b-2 border-neutral-10" : ""}`}>Home</a>
