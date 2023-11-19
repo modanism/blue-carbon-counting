@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Step = (props: StepProps) => {
   return (
-    <div className="flex">
-        {props.isFirst ? (
+    <div className="flex hover:animate-smallBounce">
+      {props.isFirst ? (
         <></>
       ) : (
         <div className="mt-[90px] mr-[20px]">
@@ -22,15 +22,12 @@ const Step = (props: StepProps) => {
           <div className="bg-[black] rounded-[10px] p-[10px]">
             <FontAwesomeIcon icon={["fas", "pen"]} size="xl" />
           </div>
-          <h1 className="text-[#1A202C] text-[16px]">
-            {props.title}
-          </h1>
+          <h1 className="text-[#1A202C] text-[16px]">{props.title}</h1>
         </div>
         <p className="text-[#1A202C] text-[14px] max-w-[220px] text-center">
           {props.desc}
         </p>
       </div>
-      
     </div>
   );
 };
