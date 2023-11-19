@@ -9,7 +9,7 @@ const OnProgress = () => {
     />
 
     <h1 className="text-center text-[48px] text-[#486284]">
-      We're still cooking our website
+      We&apos;re still cooking our website
     </h1>
   </main>)
 }

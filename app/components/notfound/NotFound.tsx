@@ -9,7 +9,7 @@ const NotFound = () => {
     />
 
     <h1 className="text-center text-[48px] text-[#486284]">
-      Oops! the page you're looking for is nowhere to found
+      Oops! the page you&apos;re looking for is nowhere to found
     </h1>
   </main>)
 }
