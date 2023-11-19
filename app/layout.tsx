@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+
+config.autoAddCss = false
 
 const plus_jakarta_sans = Plus_Jakarta_Sans({ subsets: ["latin"], display: "swap" });
 
@@ -24,3 +28,6 @@ export default function RootLayout({
     </html>
   );
 }
+// npm i --save @fortawesome/fontawesome-svg-core
+// npm install --save @fortawesome/free-solid-svg-icons
+// npm install --save @fortawesome/react-fontawesome
