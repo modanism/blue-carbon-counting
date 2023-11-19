@@ -1,9 +1,7 @@
-import OnProgress from "../components/onprogress/OnProgress";
+import OnProgress from "../../components/onprogress/OnProgress";
 
 const Calculator = () => {
-  return (
-    <OnProgress />
-  );
+  return <OnProgress />;
 };
 
 export default Calculator;

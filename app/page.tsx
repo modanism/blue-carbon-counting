@@ -1,8 +1,8 @@
 import Image from "next/image";
-import Hero from "./components/hero/Hero";
-import About from "./components/about/About";
-import Intro from "./components/intro/Intro";
-import Footer from "./components/footer/Footer";
+import Hero from "../components/hero/Hero";
+import About from "../components/about/About";
+import Intro from "../components/intro/Intro";
+import Footer from "../components/footer/Footer";
 
 export default function Home() {
   return (
