@@ -56,7 +56,7 @@ const Intro = () => {
         </TabPanels>
       </Tabs>
       <div className="absolute bottom-10">
-        <Button text="Try Now" />
+        <Button isThin={false} dest="/calculator" text="Try Now" isAnimate={true} />
       </div>
     </section>
   );

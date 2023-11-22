@@ -5,6 +5,9 @@ type StepData = {
 
 type ButtonProps = {
   text: string;
+  dest : string;
+  isAnimate: boolean;
+  isThin: boolean;
 };
 
 type StepProps = {
