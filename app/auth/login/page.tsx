@@ -8,12 +8,16 @@ import {
 } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Spinner } from "@chakra-ui/react";
 
 const Login = () => {
   const router = useRouter();
   const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSubmit(e: React.SyntheticEvent) {
+    setIsLoading(true);
     e.preventDefault();
     const target = e.target as typeof e.target & {
       email: { value: string };
@@ -21,20 +25,19 @@ const Login = () => {
     };
     const email = target.email.value; // typechecks!
     const password = target.password.value; // typechecks!
-    console.log("EMAIL : ", email);
-    console.log("PASSWORD : ", password);
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
+        setIsLoading(false);
         const user = userCredential.user;
         toast({
-            title: "Sign in successful!",
-            description: `Welcome ${user.displayName}`,
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-          });
+          title: "Sign in successful!",
+          description: `Welcome ${user.displayName}`,
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+        });
         router.replace("/");
 
         // ...
@@ -43,12 +46,14 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         toast({
-            title: `Error ${errorCode}`,
-            description: errorMessage,
-            status: "error",
-            duration: 5000,
-            isClosable: true,
-          });
+          title: `Error ${errorCode}`,
+          description: errorMessage,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+        setIsLoading(false);
+
         // ..
       });
   }
@@ -84,13 +89,17 @@ const Login = () => {
               className="w-full rounded-[10px] border-2 border-slate-500 px-[7px] pb-[3px] text-neutral-7 text-[16px]"
             />
           </div>
-          <div className="w-full flex items-center justify-center ">
-            <button
-              className="w-full pt-[8px] pb-[11px] px-[22px] transition bg-neutral-10 rounded-[30px]"
-              type="submit"
-            >
-              <p className="text-[16px] text-[#FAFAFA]">Login</p>
-            </button>
+          <div className="w-full min-h-[100px] flex items-center justify-center ">
+            {isLoading ? (
+              <Spinner color="#486284" />
+            ) : (
+              <button
+                className="w-full pt-[8px] pb-[11px] px-[22px] transition bg-neutral-10 rounded-[30px]"
+                type="submit"
+              >
+                <p className="text-[16px] text-[#FAFAFA]">Login</p>
+              </button>
+            )}
           </div>
         </form>
         <div className="w-full flex flex-wrap items-center justify-center gap-[5px]">

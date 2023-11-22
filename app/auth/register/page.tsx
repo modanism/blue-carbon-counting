@@ -9,12 +9,16 @@ import {
 } from "firebase/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Spinner } from "@chakra-ui/react";
 
 const Register = () => {
   const router = useRouter();
   const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleSubmit(e: React.SyntheticEvent) {
+    setIsLoading(true);
     e.preventDefault();
     const target = e.target as typeof e.target & {
       username: { value: string };
@@ -29,6 +33,8 @@ const Register = () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        setIsLoading(false);
+
         // Signed up
         const user = userCredential.user;
         updateProfile(auth.currentUser!, {
@@ -55,6 +61,7 @@ const Register = () => {
         // ...
       })
       .catch((error) => {
+        setIsLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         toast({
@@ -109,13 +116,17 @@ const Register = () => {
               className="w-full rounded-[10px] border-2 border-slate-500 px-[7px] pb-[3px] text-neutral-7 text-[16px]"
             />
           </div>
-          <div className="w-full flex items-center justify-center ">
-            <button
-              className="w-full pt-[8px] pb-[11px] px-[22px] transition bg-neutral-10 rounded-[30px]"
-              type="submit"
-            >
-              <p className="text-[16px] text-[#FAFAFA]">Register</p>
-            </button>
+          <div className="w-full flex items-center justify-center min-h-[100px]">
+            {isLoading ? (
+              <Spinner color="#486284" />
+            ) : (
+              <button
+                className="w-full pt-[8px] pb-[11px] px-[22px] transition bg-neutral-10 rounded-[30px]"
+                type="submit"
+              >
+                <p className="text-[16px] text-[#FAFAFA]">Register</p>
+              </button>
+            )}
           </div>
         </form>
         <div className="w-full flex flex-wrap items-center justify-center gap-[5px]">
