@@ -6,7 +6,7 @@ import Footer from "../components/footer/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-[#FAFAFA] pt-[100px]">
+    <main className="flex min-h-screen flex-col items-center justify-between bg-[#FAFAFA] pt-[80px]">
       <Hero />
       <About />
       <Intro />
