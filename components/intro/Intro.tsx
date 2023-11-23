@@ -13,9 +13,9 @@ const Intro = () => {
         tempor incididunt ut labore et
       </p>
       <Tabs mb={'50px'}>
-        <TabList>
+        <TabList mb={'120px'}>
           <Tab
-            width={"25vw"}
+            width={"40vw"}
             color={"#1A202C"}
             textColor={"#1A202C"}
             fontSize={"22px"}
@@ -24,7 +24,7 @@ const Intro = () => {
             General Equations
           </Tab>
           <Tab
-            width={"25vw"}
+            width={"40vw"}
             color={"#1A202C"}
             textColor={"#1A202C"}
             fontSize={"22px"}
@@ -32,26 +32,15 @@ const Intro = () => {
           >
             Allometric
           </Tab>
-          <Tab
-            width={"25vw"}
-            color={"#1A202C"}
-            textColor={"#1A202C"}
-            fontSize={"22px"}
-            fontWeight={"600"}
-          >
-            Advanced Equations
-          </Tab>
+        
         </TabList>
 
         <TabPanels>
-          <TabPanel width={"75vw"}>
+          <TabPanel width={"80vw"}>
             <IntroSteps key={"General Equations"} />
           </TabPanel>
-          <TabPanel width={"75vw"}>
+          <TabPanel width={"80vw"}>
             <IntroSteps key={"Allometric"} />
-          </TabPanel>
-          <TabPanel width={"75vw"}>
-            <IntroSteps key={"Advanced Equations"} />
           </TabPanel>
         </TabPanels>
       </Tabs>
