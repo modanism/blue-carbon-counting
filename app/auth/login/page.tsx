@@ -59,7 +59,7 @@ const Login = () => {
   }
 
   return (
-    <main className="flex flex-col items-center px-[112px] bg-[#EFF2F6] py-[200px]">
+    <main className="flex min-h-screen flex-col items-center px-[112px] bg-[#EFF2F6] py-[200px]">
       <section className="bg-[#FAFAFA] w-[30vw] py-[20px] px-[40px] rounded-[20px]">
         <h1 className="text-neutral-10 text-[30px] font-[700] text-center mb-[50px]">
           Login

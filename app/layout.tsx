@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/navbar/Navbar";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -28,13 +28,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+   
   return (
     <html lang="en">
       <body className={plus_jakarta_sans.className}>
         <Providers>
           <Navbar />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>

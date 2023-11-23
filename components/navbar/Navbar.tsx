@@ -17,67 +17,72 @@ import {
   MenuOptionGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
 
   function handleLogout() {
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        setIsLoggedIn(false);
+        setUsername("");
       })
       .catch((error) => {
         // An error happened.
+        console.error("Logout error:", error);
       });
   }
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    // Subscribe to the auth state change
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const uid = user.uid;
+        // User is signed in
         setIsLoggedIn(true);
-        setUsername(user.displayName ?? "");
-        // ...
+        setUsername(user.displayName || "User"); // Default to 'User' if displayName is not available
       } else {
         // User is signed out
-        // ...
         setIsLoggedIn(false);
+        setUsername("");
       }
     });
-  }, [isLoggedIn, username]);
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []); // Remove isLoggedIn and username from the dependencies array
 
   return (
     <nav className="bg-white flex flex-row gap-[20px] justify-between items-center px-[100px] py-[25px] shadow-lg fixed w-full z-[100]">
       <Image alt="logo" src={Logo} />
       <div className="flex gap-[48px] items-center">
-        <a
+        <Link
           href="/"
           className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
             pathname == "/" ? "underline underline-offset-8" : ""
           }`}
         >
           Home
-        </a>
-        <a
+        </Link>
+        <Link
           href="/calculator"
           className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
             pathname == "/calculator" ? "underline underline-offset-8" : ""
           }`}
         >
           Calculator
-        </a>
-        <a
+        </Link>
+        <Link
           href="/articles"
           className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
             pathname == "/articles" ? "underline underline-offset-8" : ""
           }`}
         >
           Articles
-        </a>
+        </Link>
         {isLoggedIn ? (
           <>
             <Menu>
