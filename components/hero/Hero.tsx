@@ -1,18 +1,22 @@
 import Button from "../button/Button";
+import Image from "next/image";
+import Background from "../../assets/img/background-hero.png";
+import { usePathname } from "next/navigation";
 
 const Hero = () => {
   return (
     <>
-      <section className="flex flex-col justify-center items-center min-h-screen px-[271px] bg-[#EFF2F6]">
-        <h1 className="text-neutral-10 text-[60px] font-[700] text-center mb-[16px]">
-          Lorem Ipsum is simply dummy
+    <section 
+      className="relative flex flex-col justify-center items-center min-h-screen w-full text-white px-4 bg-cover bg-center" 
+      style={{ backgroundImage: `url(${Background.src})`, backgroundRepeat: 'no-repeat'}}
+    >
+        <h1 className="text-neutral-10 text-[48px] font-[600] text-center mb-[16px] text-white">
+          Make Waves in The Fight Against Climate Change
         </h1>
-        <p className="text-neutral-7 text-[20px] font-[400] text-center mb-[100px]">
-          Welcome to Burger Bliss, where we take your cravings to a whole new
-          level! Our mouthwatering burgers are made from 100% beef and are
-          served on freshly baked buns.{" "}
+        <p className="text-neutral-7 text-[20px] font-[400] text-center mb-[100px] text-white w-[1080px]">
+          Mangroves can become sources of carbon emissions, posing a potential threat to our world. Join us in calculating mangroves hidden carbon emissions and mitigating their impact on our global climate..{" "}
         </p>
-        <Button isThin={false} dest="/calculator" text="Explore" isAnimate={true}/>
+        <Button isThin={false} dest="/calculator" text="Explore" isAnimate={true} bgColor={"!bg-neutral-15"}/>
       </section>
     </>
   );

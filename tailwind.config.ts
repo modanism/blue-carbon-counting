@@ -18,6 +18,7 @@ const config: Config = {
           1: "#DEE5ED",
           7: "#8CA2C0",
           10: "#486284",
+          15: "#54706B"
         },
       },
       animation: {
