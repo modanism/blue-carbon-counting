@@ -20,6 +20,7 @@ import {
 import { app, auth } from "../../lib/firebase/config"; // path to your Firebase configuration
 import { useState, useEffect, SetStateAction } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import CalculatorComponent from "@/components/calculator/CalculatorComponent";
 
 type ProjectEntity = {
   id?: string;
@@ -116,7 +117,8 @@ const Calculator = () => {
     <main className="flex min-h-screen w-full bg-[#FAFAFA]">
       {isLoggedIn ? (
         <>
-          <section className="flex flex-col items-start basis-1/5 bg-[#EFF2F6] h-[100vh] pt-[150px] relative">
+          <section className="basis-1/5"></section>
+          <section className="flex flex-col items-start bg-[#EFF2F6] h-full pt-[150px] w-[20vw] fixed">
             <div className="w-full min-h-[50px] flex justify-center items-center">
               {addButtonLoading ? (
                 <>
@@ -168,10 +170,11 @@ const Calculator = () => {
       ) : (
         <></>
       )}
-      <section className="basis-4/5 grow min-h-screen pt-[150px]">
+      <section className="basis-4/5 grow min-h-screen pt-[150px] px-[120px]">
         <h1 className="text-[30px] text-[black]">
           {currentProject ? currentProject.name : "Select a project"}
         </h1>
+        <CalculatorComponent />
       </section>
     </main>
   );

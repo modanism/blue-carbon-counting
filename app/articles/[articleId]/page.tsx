@@ -9,15 +9,12 @@ const DetailArticle = ({ params }: { params: { articleId: string } }) => {
         <h1 className="text-neutral-10 text-[40px] font-[700] text-center">
           Lorem Ipsum is simply {params.articleId}
         </h1>
-        <div className="overflow-hidden h-[358px] w-full rounded-[24px] relative">
-          <Image
-            src={MangroveImg}
-            alt="news image"
-            placeholder="blur"
-            style={{ objectFit: "fill" }}
-            fill
-          />
+        <div className="w-full flex justify-center items-center">
+          <div className="overflow-hidden rounded-[24px] relative">
+            <Image src={MangroveImg} alt="news image" placeholder="blur" />
+          </div>
         </div>
+
         <h2 className="text-[16px] text-neutral-7">
           Mochammad Ramadhany<br></br>Bandung, 19 November 2023
         </h2>
