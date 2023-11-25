@@ -30,13 +30,17 @@ const StepCard = (props: StepCardProps) => {
         <p className="text-[20px] font-bold text-[#FAFAFA]">{props.id}</p>
         <div style={triangleStyle} />
 
-        <div className="bg-[#EFF3FD] shadow-md pl-[40px] py-[12px] rounded-[25px] w-[320px] h-[159px] flex flex-col absolute bottom-[10px] left-[30px] gap-[5px] z-[5]">
-          <h1 className="text-[14px] text-[#000000] font-semibold">
-            {props.title}
-          </h1>
-          <span className="h-[1px] bg-[#383838] w-[75%] mb-[5px]" />
-          <div className="w-full flex gap-[20px]">
-            <p className="text-[#1A202C] text-[13px] w-[75%]">
+        <div className="bg-[#FCFFE8] shadow-md pl-[40px] py-[12px] rounded-[25px] w-[320px] h-[159px] flex flex-col absolute bottom-[10px] left-[30px] gap-[5px] z-[5]">
+          <div className="flex flex-col w-full justify-center">
+            <div className="flex w-[75%] justify-center">
+            <h1 className="text-[18px] text-[#000000] font-semibold">
+              {props.title}
+            </h1>
+            </div>
+            <div className="h-[1px] bg-[#383838] w-[75%] mb-[5px]" />
+          </div>
+          <div className="w-full h-full flex gap-[20px] items-center">
+            <p className="text-[#1A202C] text-[16px] w-[75%]">
               {props.content}
             </p>
             {props.id === 1 ? (

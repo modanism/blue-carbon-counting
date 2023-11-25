@@ -56,12 +56,12 @@ const Navbar = () => {
   }, []); // Remove isLoggedIn and username from the dependencies array
 
   return (
-    <nav className="bg-white flex flex-row gap-[20px] justify-between items-center px-[100px] py-[25px] shadow-lg fixed w-full z-[100]">
+    <nav className="bg-black flex flex-row gap-[20px] justify-between items-center px-[100px] py-[25px] shadow-lg fixed w-full z-[100]">
       <Image alt="logo" src={Logo} />
       <div className="flex gap-[48px] items-center">
         <Link
           href="/"
-          className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
+          className={`hover:animate-smallBounce text-white text-[16px] cursor-pointer ${
             pathname == "/" ? "underline underline-offset-8" : ""
           }`}
         >
@@ -69,7 +69,7 @@ const Navbar = () => {
         </Link>
         <Link
           href="/calculator"
-          className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
+          className={`hover:animate-smallBounce text-white text-[16px] cursor-pointer ${
             pathname == "/calculator" ? "underline underline-offset-8" : ""
           }`}
         >
@@ -77,7 +77,7 @@ const Navbar = () => {
         </Link>
         <Link
           href="/articles"
-          className={`hover:animate-smallBounce text-neutral-10 text-[16px] cursor-pointer ${
+          className={`hover:animate-smallBounce text-white text-[16px] cursor-pointer ${
             pathname == "/articles" ? "underline underline-offset-8" : ""
           }`}
         >
@@ -103,6 +103,7 @@ const Navbar = () => {
               text="Login"
               dest="/auth/login"
               isAnimate={false}
+              bgColor={"!bg-neutral-15"}
             />
           </>
         )}

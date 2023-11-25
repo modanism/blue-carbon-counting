@@ -25,3 +25,23 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.deskripsi-artikel p {
+  color: black;
+}
+
+.deskripsi-artikel h1 {
+  color: black;
+}
+
+.deskripsi-artikel h2 {
+  color: black;
+}
+
+.deskripsi-artikel q {
+  color: red;
+}
+
+.deskripsi-artikel STRONG {
+  color: black
+}

@@ -8,6 +8,7 @@ type ButtonProps = {
   dest : string;
   isAnimate: boolean;
   isThin: boolean;
+  bgColor: string;
 };
 
 type StepProps = {
