@@ -18,7 +18,7 @@ import { Field, Form, Formik, FormikHelpers } from "formik";
 
 import CarbonStock from "@/assets/img/carbon-stocks.png";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // 1. B. gymnorhiza
 // 2. R. apiculata
@@ -105,37 +105,15 @@ interface Values {
   area: number;
 }
 
-type AboveFormula = {
-  constant: number;
-  ownConstant: boolean;
-  density: number | string;
-  ownDensity: boolean;
-  diameter: number | string;
-  ownDiameter: boolean;
-  height: number | string;
-};
-
-type BelowFormula = {
-  constant: number;
-  ownConstant: boolean;
-  density: number | string;
-  densityPower: number | string;
-  ownDensity: boolean;
-  diameter: number | string;
-  ownDiameter: boolean;
-  height: number | string;
-};
-
-type SoilFormula = {
-  depth: number;
-  bulk: number;
-  ownBulk: boolean;
-  carbon: number;
-  ownCarbon: boolean;
-};
-
-const CalculatorComponent = () => {
+const CalculatorComponent = ({
+  id,
+  updateCalculatorData,
+}: CalculatorComponentProps) => {
   const [isOwnSpecies, setIsOwnSpecies] = useState(false);
+  const [selectedSpeciesName, setSelectedSpeciesName] = useState("");
+  const [area, setArea] = useState<AreaData>({ area: 0, trees: 0 });
+
+  const [species, setSpecies] = useState(speciesData[0]);
   const [aboveFormula, setAboveFormula] = useState<AboveFormula>({
     constant: 0.251,
     ownConstant: false,
@@ -183,10 +161,32 @@ const CalculatorComponent = () => {
     }
   }
 
-  
+  const findSpeciesData = (speciesName: string) => {
+    return speciesData.find((species) => species.species === speciesName);
+  };
+
+  useEffect(() => {
+    updateCalculatorData(id, {
+      species, // Ensure this is the correct structure for species data
+      area,
+      aboveFormula,
+      belowFormula,
+      soilFormula,
+    });
+  }, [
+    id,
+    area,
+    species,
+    aboveFormula,
+    belowFormula,
+    soilFormula,
+    updateCalculatorData,
+  ]);
 
   return (
     <>
+      <span className="h-[2px] w-full bg-[#30514B] my-[20px] rounded-full" />
+
       <Formik
         initialValues={{
           speciesName: "",
@@ -205,7 +205,7 @@ const CalculatorComponent = () => {
           }, 500);
         }}
       >
-        <Form>
+        <Form className="mb-[20px]">
           <div className="flex flex-col w-full mb-[30px]">
             <div className="flex w-full justify-between">
               <div className="bg-[#314C47] w-[40%] py-[12px] px-[20px] rounded-[25px]">
@@ -253,14 +253,52 @@ const CalculatorComponent = () => {
                         ) : (
                           <Select
                             {...field}
+                            value={selectedSpeciesName}
                             placeholder="Select a species"
                             className="bg-[#FAFAFA] rounded-[12px] text-[#585656] mb-[10px] mt-[8px]"
+                            onChange={(e) => {
+                              const newSpeciesName = e.target.value;
+                              setSelectedSpeciesName(newSpeciesName);
+                              const selectedSpecies = findSpeciesData(
+                                e.target.value
+                              );
+                              if (selectedSpecies) {
+                                setSpecies(selectedSpecies);
+                                setAboveFormula({
+                                  constant: selectedSpecies.aboveConstant,
+                                  ownConstant: false,
+                                  density: selectedSpecies.aboveDensity,
+                                  ownDensity: false,
+                                  diameter: selectedSpecies.aboveDiameter,
+                                  ownDiameter: false,
+                                  height: selectedSpecies.aboveHeightPower,
+                                });
+                                setBelowFormula({
+                                  constant: selectedSpecies.belowConstant,
+                                  ownConstant: false,
+                                  density: selectedSpecies.belowDensity,
+                                  densityPower:
+                                    selectedSpecies.belowDensityPower,
+                                  ownDensity: false,
+                                  diameter: selectedSpecies.belowDiameter,
+                                  ownDiameter: false,
+                                  height: selectedSpecies.belowHeight,
+                                });
+                                setSoilFormula({
+                                  depth: 0, // Keep the existing depth
+                                  bulk: getCorrespondingValue(0), // Calculate bulk density based on the depth
+                                  ownBulk: false,
+                                  carbon: selectedSpecies.carbonPercent,
+                                  ownCarbon: false,
+                                });
+                              }
+                            }}
                           >
                             <option value="B. gymnorhiza">B. gymnorhiza</option>
                             <option value="R. apiculata">R. apiculata</option>
                             <option value="R. mucronata">R. mucronata</option>
                             <option value="S. alba">S. alba</option>
-                            <option value="X. Granatum">X. Granatum</option>
+                            <option value="X. granatum">X. Granatum</option>
                           </Select>
                         )}
 
@@ -338,7 +376,16 @@ const CalculatorComponent = () => {
                             min={0}
                             className="basis-3/4 bg-[#FAFAFA] rounded-[12px] text-[#585656] mt-[8px] mb-[10px] w-[40%]"
                           >
-                            <NumberInputField {...field} />
+                            <NumberInputField
+                              {...field}
+                              value={area.trees}
+                              onChange={(e) => {
+                                setArea((prev) => ({
+                                  ...prev,
+                                  trees: Number(e.target.value),
+                                }));
+                              }}
+                            />
                           </NumberInput>
                           <p className="basis-1/4 text-center">trees</p>
                         </div>
@@ -347,7 +394,16 @@ const CalculatorComponent = () => {
                           {({ field }: any) => (
                             <div className="flex gap-[10px] items-center w-[40%]">
                               <NumberInput className="basis-3/4 bg-[#FAFAFA] rounded-[12px] text-[#585656] mt-[8px] mb-[10px] w-[40%]">
-                                <NumberInputField {...field} />
+                                <NumberInputField
+                                  {...field}
+                                  value={area.area}
+                                  onChange={(e) => {
+                                    setArea((prev) => ({
+                                      ...prev,
+                                      area: Number(e.target.value),
+                                    }));
+                                  }}
+                                />
                               </NumberInput>
                               <p className="basis-1/4 w-fit text-center">
                                 m&sup2;
@@ -1110,9 +1166,9 @@ const CalculatorComponent = () => {
               </div>
             </div>
           </div>
-          <button type="submit" className="bg-[red]">
+          {/* <button type="submit" className="bg-[red]">
             Submit
-          </button>
+          </button> */}
         </Form>
       </Formik>
     </>
