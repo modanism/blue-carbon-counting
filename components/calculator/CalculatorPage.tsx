@@ -31,26 +31,7 @@ import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import CalculatorComponent from "@/components/calculator/CalculatorComponent";
 import { useRouter } from "next/navigation";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
-import Link from "next/link";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import TableResult from "./TableResult";
 
 export const options = {
   plugins: {
@@ -446,7 +427,16 @@ const Calculator = () => {
 
         {isCalc ? (
           <>
-            {" "}
+            <TableResult
+              tableData={tableData}
+              totalArea={totalArea}
+              averageArea={averageArea}
+              totalDensity={totalDensity}
+              averageDensity={averageDensity}
+              options={options}
+              data={data}
+            />
+            {/* {" "}
             <TableContainer bg={"#30514B"} marginBottom={"20px"}>
               <Table variant="simple">
                 <Thead>
@@ -539,7 +529,7 @@ const Calculator = () => {
               >
                 Try Forecast
               </Link>
-            </div>
+            </div> */}
           </>
         ) : (
           <></>
