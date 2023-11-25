@@ -38,8 +38,6 @@ ChartJS.register(
   Legend
 );
 
-
-
 type ResultProp = {
   tableData: TableData[];
   totalArea: number;
@@ -57,9 +55,9 @@ const TableResult = (props: ResultProp) => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Species</Th>
-              <Th>Surface Area</Th>
-              <Th>Density</Th>
+              <Th className="text-[#FAFAFA]">Species</Th>
+              <Th className="text-[#FAFAFA]">Surface Area</Th>
+              <Th className="text-[#FAFAFA]">Density</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -89,10 +87,10 @@ const TableResult = (props: ResultProp) => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Species</Th>
-              <Th>AgB</Th>
-              <Th>BgB</Th>
-              <Th>Soil</Th>
+              <Th className="text-[#FAFAFA]">Species</Th>
+              <Th className="text-[#FAFAFA]">AgB</Th>
+              <Th className="text-[#FAFAFA]">BgB</Th>
+              <Th className="text-[#FAFAFA]">Soil</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -113,11 +111,11 @@ const TableResult = (props: ResultProp) => {
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th>Species</Th>
-              <Th>AgC</Th>
-              <Th>BgC</Th>
-              <Th>Soil C</Th>
-              <Th>Total</Th>
+              <Th className="text-[#FAFAFA]">Species</Th>
+              <Th className="text-[#FAFAFA]">AgC</Th>
+              <Th className="text-[#FAFAFA]">BgC</Th>
+              <Th className="text-[#FAFAFA]">Soil C</Th>
+              <Th className="text-[#FAFAFA]">Total</Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -136,18 +134,9 @@ const TableResult = (props: ResultProp) => {
         </Table>
       </TableContainer>
       <Bar options={props.options} data={props.data} />
-      <div className="w-full flex justify-center items-center">
-        <Link
-          href={
-            "https://docs.google.com/spreadsheets/d/1ekFVsk9lgbHkvzQ97lD4woA8K89EkGIzB9Jakber2-0/edit?usp=sharing"
-          }
-          className="bg-[#30514B] text-[white] px-[20px] py-[12px] font-bold rounded-[25px] mb-[50px]"
-        >
-          Try Forecast
-        </Link>
-      </div>
+      
     </>
   );
 };
 
-export default TableResult
+export default TableResult;

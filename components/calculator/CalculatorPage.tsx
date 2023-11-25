@@ -170,17 +170,17 @@ const Calculator = () => {
         {
           label: "AgBC",
           data: speciesCalculations.map((e) => e.AGC),
-          backgroundColor: "rgb(255, 99, 132)",
+          backgroundColor: "#DEE5ED",
         },
         {
           label: "BgBC",
-          data: speciesCalculations.map((e) => e.BGC * -1),
-          backgroundColor: "rgb(75, 192, 192)",
+          data: speciesCalculations.map((e) => e.BGC),
+          backgroundColor: "#000000",
         },
         {
           label: "SoilC",
-          data: speciesCalculations.map((e) => e.soilC),
-          backgroundColor: "rgb(53, 162, 235)",
+          data: speciesCalculations.map((e) => e.soilC * -1),
+          backgroundColor: "#314C47",
         },
       ],
     };
@@ -534,6 +534,18 @@ const Calculator = () => {
         ) : (
           <></>
         )}
+        <div className="w-full flex justify-center items-center">
+          <button
+            onClick={() =>
+              router.push(
+                "https://docs.google.com/spreadsheets/d/1ekFVsk9lgbHkvzQ97lD4woA8K89EkGIzB9Jakber2-0/edit?usp=sharing"
+              )
+            }
+            className="bg-[#30514B] text-[white] px-[20px] py-[12px] font-bold rounded-[25px] mb-[50px]"
+          >
+            Try Forecast
+          </button>
+        </div>
       </section>
     </main>
   );
