@@ -99,91 +99,91 @@ const Calculator = () => {
   const router = useRouter();
 
   const handleCalculate = () => {
-    console.log(calculatorData);
-    const totalArea = calculatorData.reduce(
-      (acc, curr) => acc + curr.area.area,
-      0
-    );
-    setTotalArea(totalArea);
-    const totalDensity = calculatorData.reduce((acc, curr) => {
-      const density = curr.area.trees / curr.area.area;
-      return acc + (isFinite(density) ? density : 0); // Avoid division by zero
-    }, 0);
-    const averageDensity = totalDensity / calculatorData.length;
-    const averageArea = totalArea / calculatorData.length;
-    setAverageDensity(averageDensity);
-    setAverageArea(averageArea);
-    setTotalDensity(totalDensity);
+    // console.log(calculatorData);
+    // const totalArea = calculatorData.reduce(
+    //   (acc, curr) => acc + curr.area.area,
+    //   0
+    // );
+    // setTotalArea(totalArea);
+    // const totalDensity = calculatorData.reduce((acc, curr) => {
+    //   const density = curr.area.trees / curr.area.area;
+    //   return acc + (isFinite(density) ? density : 0); // Avoid division by zero
+    // }, 0);
+    // const averageDensity = totalDensity / calculatorData.length;
+    // const averageArea = totalArea / calculatorData.length;
+    // setAverageDensity(averageDensity);
+    // setAverageArea(averageArea);
+    // setTotalDensity(totalDensity);
 
-    console.log(`total Area : ${totalArea}`);
-    console.log(`average density : ${averageDensity}`);
+    // console.log(`total Area : ${totalArea}`);
+    // console.log(`average density : ${averageDensity}`);
 
-    const speciesCalculations = calculatorData.map((calcData) => {
-      const AGB =
-        calcData.aboveFormula.constant *
-        Number(calcData.aboveFormula.density) *
-        Math.pow(
-          Number(calcData.aboveFormula.diameter),
-          Number(calcData.aboveFormula.height)
-        );
-      const BGB =
-        calcData.belowFormula.constant *
-        Math.pow(
-          Number(calcData.belowFormula.density),
-          Number(calcData.belowFormula.densityPower)
-        ) *
-        Math.pow(
-          Number(calcData.belowFormula.diameter),
-          Number(calcData.belowFormula.height)
-        );
-      const Soil =
-        calcData.soilFormula.depth *
-        calcData.soilFormula.bulk *
-        (calcData.soilFormula.carbon / 100);
-      const Total = AGB + BGB + Soil;
+    // const speciesCalculations = calculatorData.map((calcData) => {
+    //   const AGB =
+    //     calcData.aboveFormula.constant *
+    //     Number(calcData.aboveFormula.density) *
+    //     Math.pow(
+    //       Number(calcData.aboveFormula.diameter),
+    //       Number(calcData.aboveFormula.height)
+    //     );
+    //   const BGB =
+    //     calcData.belowFormula.constant *
+    //     Math.pow(
+    //       Number(calcData.belowFormula.density),
+    //       Number(calcData.belowFormula.densityPower)
+    //     ) *
+    //     Math.pow(
+    //       Number(calcData.belowFormula.diameter),
+    //       Number(calcData.belowFormula.height)
+    //     );
+    //   const Soil =
+    //     calcData.soilFormula.depth *
+    //     calcData.soilFormula.bulk *
+    //     (calcData.soilFormula.carbon / 100);
+    //   const Total = AGB + BGB + Soil;
 
-      const AGC = AGB * (calcData.soilFormula.carbon / 100);
-      const BGC = BGB * (calcData.soilFormula.carbon / 100);
-      const soilC = Soil;
+    //   const AGC = AGB * (calcData.soilFormula.carbon / 100);
+    //   const BGC = BGB * (calcData.soilFormula.carbon / 100);
+    //   const soilC = Soil;
 
-      return {
-        speciesName: calcData.species.species,
-        area: calcData.area.area,
-        density: calcData.area.trees / calcData.area.area,
-        AGB: AGB,
-        BGB: BGB,
-        Soil: Soil,
-        Total: Total,
-        AGC: AGC,
-        BGC: BGC,
-        soilC: soilC,
-      };
-    });
+    //   return {
+    //     speciesName: calcData.species.species,
+    //     area: calcData.area.area,
+    //     density: calcData.area.trees / calcData.area.area,
+    //     AGB: AGB,
+    //     BGB: BGB,
+    //     Soil: Soil,
+    //     Total: Total,
+    //     AGC: AGC,
+    //     BGC: BGC,
+    //     soilC: soilC,
+    //   };
+    // });
 
-    console.log(speciesCalculations);
-    setTableData(speciesCalculations);
-    setIsCalc(true);
-    labels = speciesCalculations.map((e) => e.speciesName);
-    data = {
-      labels,
-      datasets: [
-        {
-          label: "AgBC",
-          data: speciesCalculations.map((e) => e.AGC),
-          backgroundColor: "rgb(255, 99, 132)",
-        },
-        {
-          label: "BgBC",
-          data: speciesCalculations.map((e) => e.BGC * -1),
-          backgroundColor: "rgb(75, 192, 192)",
-        },
-        {
-          label: "SoilC",
-          data: speciesCalculations.map((e) => e.soilC),
-          backgroundColor: "rgb(53, 162, 235)",
-        },
-      ],
-    };
+    // console.log(speciesCalculations);
+    // setTableData(speciesCalculations);
+    // setIsCalc(true);
+    // labels = speciesCalculations.map((e) => e.speciesName);
+    // data = {
+    //   labels,
+    //   datasets: [
+    //     {
+    //       label: "AgBC",
+    //       data: speciesCalculations.map((e) => e.AGC),
+    //       backgroundColor: "rgb(255, 99, 132)",
+    //     },
+    //     {
+    //       label: "BgBC",
+    //       data: speciesCalculations.map((e) => e.BGC * -1),
+    //       backgroundColor: "rgb(75, 192, 192)",
+    //     },
+    //     {
+    //       label: "SoilC",
+    //       data: speciesCalculations.map((e) => e.soilC),
+    //       backgroundColor: "rgb(53, 162, 235)",
+    //     },
+    //   ],
+    // };
   };
 
   const updateCalculatorData = (

@@ -1,7 +1,9 @@
+import Calculator from "@/components/calculator/CalculatorPage";
+
 const CalculatorPage = () => {
   return (
     <>
-      <CalculatorPage />
+      <Calculator />
     </>
   );
 };
