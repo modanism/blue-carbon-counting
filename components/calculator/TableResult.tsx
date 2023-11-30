@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Tabs,
   TabList,
@@ -24,10 +26,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -44,14 +48,94 @@ type ResultProp = {
   averageArea: number;
   totalDensity: number;
   averageDensity: number;
-  options: any;
   data: any;
 };
 
-const TableResult = (props: ResultProp) => {
+// type ChartData = {
+//   labels : string[];
+//   datasets : {
+//     label : string
+//     data : number[]
+//     backgroundColor : string
+//   }
+// }
+
+export const options = {
+  plugins: {
+    title: {
+      display: true,
+      text: "Chart.js Bar Chart - Stacked",
+    },
+  },
+  responsive: true,
+  scales: {
+    x: {
+      stacked: true,
+    },
+    y: {
+      stacked: true,
+    },
+  },
+};
+
+const TableResult = () => {
+  const [tableData, setTableData] = useState<TableData[]>([]);
+  const [chartData, setChartData] = useState({
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    datasets: [
+      {
+        label: "AgBC",
+        data: [1, 2, 2],
+        backgroundColor: "rgb(255, 99, 132)",
+      },
+      {
+        label: "BgBC",
+        data: [],
+        backgroundColor: "rgb(75, 192, 192)",
+      },
+      {
+        label: "SoilC",
+        data: [],
+        backgroundColor: "rgb(53, 162, 235)",
+      },
+    ],
+  });
+  const [totalArea, setTotalArea] = useState(0);
+  const [averageArea, setAverageArea] = useState(0);
+  const [totalDensity, setTotalDensity] = useState(0);
+  const [averageDensity, setAverageDensity] = useState(0);
+
+  useEffect(() => {
+    // Retrieve data from local storage
+    const storedTableData = localStorage.getItem("tableData");
+    const storedChartData = localStorage.getItem("chartData");
+    const storedTotalArea = localStorage.getItem("totalArea");
+    const storedAverageArea = localStorage.getItem("averageArea");
+    const storedTotalDensity = localStorage.getItem("totalDensity");
+    const storedAverageDensity = localStorage.getItem("averageDensity");
+
+    console.log(`TABLAE DATA : ${storedTableData}`);
+
+    if (
+      storedTableData &&
+      storedChartData &&
+      storedTotalArea &&
+      storedAverageArea &&
+      storedTotalDensity &&
+      storedAverageDensity
+    ) {
+      setTableData(JSON.parse(storedTableData));
+      setChartData(JSON.parse(storedChartData));
+      setTotalArea(JSON.parse(storedTotalArea));
+      setAverageArea(JSON.parse(storedAverageArea));
+      setTotalDensity(JSON.parse(storedTotalDensity));
+      setAverageDensity(JSON.parse(storedAverageDensity));
+    }
+  }, []);
+
   return (
     <>
-      <TableContainer bg={"#30514B"} marginBottom={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} marginBottom={"20px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -61,29 +145,29 @@ const TableResult = (props: ResultProp) => {
             </Tr>
           </Thead>
           <Tbody>
-            {props.tableData.map((e) => (
+            {tableData.map((e, index) => (
               <>
                 <Tr>
-                  <Td>{e.speciesName}</Td>
-                  <Td>{e.area}</Td>
-                  <Td>{e.density}</Td>
+                  <Td key={index}>{e.speciesName}</Td>
+                  <Td key={index}>{e.area}</Td>
+                  <Td key={index}>{e.density}</Td>
                 </Tr>
               </>
             ))}
             <Tr>
               <Td>Total</Td>
-              <Td>{props.totalArea}</Td>
-              <Td>{props.averageArea}</Td>
+              <Td>{totalArea}</Td>
+              <Td>{averageArea}</Td>
             </Tr>
             <Tr>
               <Td>Average</Td>
-              <Td>{props.totalDensity}</Td>
-              <Td>{props.averageDensity}</Td>
+              <Td>{totalDensity}</Td>
+              <Td>{averageDensity}</Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer bg={"#30514B"} mb={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -94,20 +178,20 @@ const TableResult = (props: ResultProp) => {
             </Tr>
           </Thead>
           <Tbody>
-            {props.tableData.map((e) => (
+            {tableData.map((e, index) => (
               <>
                 <Tr>
-                  <Td>{e.speciesName}</Td>
-                  <Td>{e.AGB}</Td>
-                  <Td>{e.BGB}</Td>
-                  <Td>{e.Soil}</Td>
+                  <Td key={index}>{e.speciesName}</Td>
+                  <Td key={index}>{e.AGB}</Td>
+                  <Td key={index}>{e.BGB}</Td>
+                  <Td key={index}>{e.Soil}</Td>
                 </Tr>
               </>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer bg={"#30514B"} mb={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -119,22 +203,21 @@ const TableResult = (props: ResultProp) => {
             </Tr>
           </Thead>
           <Tbody>
-            {props.tableData.map((e) => (
+            {tableData.map((e, index) => (
               <>
                 <Tr>
-                  <Td>{e.speciesName}</Td>
-                  <Td>{e.AGC}</Td>
-                  <Td>{e.BGC}</Td>
-                  <Td>{e.soilC}</Td>
-                  <Td>{e.Total}</Td>
+                  <Td key={index}>{e.speciesName}</Td>
+                  <Td key={index}>{e.AGC}</Td>
+                  <Td key={index}>{e.BGC}</Td>
+                  <Td key={index}>{e.soilC}</Td>
+                  <Td key={index}>{e.Total}</Td>
                 </Tr>
               </>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <Bar options={props.options} data={props.data} />
-      
+      <Bar options={options} data={chartData} />
     </>
   );
 };

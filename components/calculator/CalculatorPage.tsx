@@ -16,24 +16,6 @@ import { useRouter } from "next/navigation";
 import TableResult from "./TableResult";
 import Link from "next/link";
 
-export const options = {
-  plugins: {
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart - Stacked",
-    },
-  },
-  responsive: true,
-  scales: {
-    x: {
-      stacked: true,
-    },
-    y: {
-      stacked: true,
-    },
-  },
-};
-
 let labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export let data = {
@@ -224,6 +206,13 @@ const Calculator = () => {
         },
       ],
     };
+    localStorage.setItem("tableData", JSON.stringify(speciesCalculations));
+    localStorage.setItem("totalArea", JSON.stringify(totalArea));
+    localStorage.setItem("averageArea", JSON.stringify(averageArea));
+    localStorage.setItem("totalDensity", JSON.stringify(totalDensity));
+    localStorage.setItem("averageDensity", JSON.stringify(averageDensity));
+    localStorage.setItem("chartData", JSON.stringify(data));
+    router.push("/calculator/result");
   };
 
   const updateCalculatorData = (
@@ -328,7 +317,8 @@ const Calculator = () => {
     <main className="flex min-h-screen w-full bg-[#FAFAFA]">
       <section className="basis-4/5 grow min-h-screen pt-[150px] px-[120px]">
         <h1 className="text-[30px] text-[black]">
-          {currentProject ? currentProject.name : "Select a project"}
+          {/* {currentProject ? currentProject.name : "Select a project"} */}
+          Calculator
         </h1>
         <div className="flex flex-col">
           {calculatorData.map((data) => (
@@ -360,32 +350,6 @@ const Calculator = () => {
             </div>
           </>
         )}
-
-        {isCalc ? (
-          <>
-            <TableResult
-              tableData={tableData}
-              totalArea={totalArea}
-              averageArea={averageArea}
-              totalDensity={totalDensity}
-              averageDensity={averageDensity}
-              options={options}
-              data={data}
-            />
-          </>
-        ) : (
-          <></>
-        )}
-        <div className="w-full flex justify-center items-center">
-          <Link
-            target="_blank"
-            href="https://docs.google.com/spreadsheets/d/1ekFVsk9lgbHkvzQ97lD4woA8K89EkGIzB9Jakber2-0/edit?usp=sharing"
-            rel="noopener noreferrer"
-            className="bg-[#30514B] text-[white] px-[20px] py-[12px] font-bold rounded-[25px] mb-[50px]"
-          >
-            Try Forecast
-          </Link>
-        </div>
       </section>
     </main>
   );
