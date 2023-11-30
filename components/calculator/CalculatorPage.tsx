@@ -1,23 +1,5 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-} from "@chakra-ui/react";
 import {
   getFirestore,
   doc,
@@ -32,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import CalculatorComponent from "@/components/calculator/CalculatorComponent";
 import { useRouter } from "next/navigation";
 import TableResult from "./TableResult";
+import Link from "next/link";
 
 export const options = {
   plugins: {
@@ -94,9 +77,66 @@ const Calculator = () => {
   const [averageArea, setAverageArea] = useState(0);
   const [isCalc, setIsCalc] = useState(false);
 
-  const [calculatorData, setCalculatorData] = useState<CalculatorData[]>([]);
+  const createNewCalculatorData = (): CalculatorData => {
+    return {
+      id: crypto.randomUUID(),
+      area: {
+        trees: 0,
+        area: 0,
+      },
+      species: {
+        species: "",
+        aboveConstant: 0,
+        aboveDensity: 0,
+        aboveDiameter: 0,
+        aboveHeightPower: 0,
+        belowConstant: 0,
+        belowDensity: 0,
+        belowDensityPower: 0,
+        belowDiameter: 0,
+        belowHeight: 0,
+        carbonPercent: 0,
+      },
+      aboveFormula: {
+        constant: 0,
+        ownConstant: false,
+        density: "",
+        ownDensity: false,
+        diameter: "",
+        ownDiameter: false,
+        height: "",
+      },
+      belowFormula: {
+        constant: 0,
+        ownConstant: false,
+        density: "",
+        densityPower: "",
+        ownDensity: false,
+        diameter: "",
+        ownDiameter: false,
+        height: "",
+      },
+      soilFormula: {
+        depth: 0,
+        bulk: 0,
+        ownBulk: false,
+        carbon: 0,
+        ownCarbon: false,
+      },
+    };
+  };
+
+  const [calculatorData, setCalculatorData] = useState<CalculatorData[]>([
+    createNewCalculatorData(),
+  ]);
 
   const router = useRouter();
+
+  const removeCalculatorComponent = (id: string) => {
+    setCalculatorData((currentData) =>
+      currentData.filter((data) => data.id !== id)
+    );
+  };
 
   const handleCalculate = () => {
     console.log(calculatorData);
@@ -202,60 +242,10 @@ const Calculator = () => {
   };
 
   const addCalculatorComponent = () => {
-    console.log("HELLO");
-
-    const newCalculatorData: CalculatorData = {
-      id: generateId(),
-      area: {
-        trees: 0,
-        area: 0,
-      },
-      species: {
-        // Provide initial values for the species data
-        species: "",
-        aboveConstant: 0,
-        aboveDensity: 0,
-        aboveDiameter: 0,
-        aboveHeightPower: 0,
-        belowConstant: 0,
-        belowDensity: 0,
-        belowDensityPower: 0,
-        belowDiameter: 0,
-        belowHeight: 0,
-        carbonPercent: 0,
-      },
-      aboveFormula: {
-        // Provide initial values for the above formula data
-        constant: 0,
-        ownConstant: false,
-        density: "",
-        ownDensity: false,
-        diameter: "",
-        ownDiameter: false,
-        height: "",
-      },
-      belowFormula: {
-        // Provide initial values for the below formula data
-        constant: 0,
-        ownConstant: false,
-        density: "",
-        densityPower: "",
-        ownDensity: false,
-        diameter: "",
-        ownDiameter: false,
-        height: "",
-      },
-      soilFormula: {
-        // Provide initial values for the soil formula data
-        depth: 0,
-        bulk: 0,
-        ownBulk: false,
-        carbon: 0,
-        ownCarbon: false,
-      },
-    };
-
-    setCalculatorData((currentData) => [...currentData, newCalculatorData]);
+    setCalculatorData((currentData) => [
+      ...currentData,
+      createNewCalculatorData(),
+    ]);
   };
 
   const handleTabsChange = (index: number) => {
@@ -263,7 +253,6 @@ const Calculator = () => {
     setCurrentProject(projects[index]);
   };
 
-  // Function to fetch user data
   const fetchUserData = async () => {
     const db = getFirestore(app);
     const docRef = doc(db, "users", auth.currentUser?.uid ?? "");
@@ -274,7 +263,6 @@ const Calculator = () => {
         setProjects(docSnap.data().projects);
         setCurrentProject(docSnap.data().projects[0]);
       } else {
-        // Document doesn't exist or doesn't have projects, so create it with default data
         const defaultProjects = [
           {
             id: "project-1",
@@ -338,61 +326,6 @@ const Calculator = () => {
 
   return (
     <main className="flex min-h-screen w-full bg-[#FAFAFA]">
-      {/* {isLoggedIn ? (
-        <>
-          <section className="basis-1/5"></section>
-          <section className="flex flex-col items-start bg-[#EFF2F6] h-full pt-[150px] w-[20vw] fixed">
-            <div className="w-full min-h-[50px] flex justify-center items-center">
-              {addButtonLoading ? (
-                <>
-                  <Spinner color="#486284" />
-                </>
-              ) : (
-                <>
-                  <button
-                    onClick={handleCreateProject}
-                    className="shadow-md transition-all hover:shadow-none py-[12px] px-[20px] bg-white rounded-[50px] flex justify-center items-center gap-[10px]"
-                  >
-                    <p className="text-[#11156D] text-[16px] font-semibold">
-                      New Project
-                    </p>
-                  </button>
-                </>
-              )}
-            </div>
-            <h1 className="text-[14px] text-neutral-7 mb-[10px] px-[15px]">
-              Projects
-            </h1>
-
-            <Tabs
-              orientation="vertical"
-              variant="solid-rounded"
-              colorScheme={"blue"}
-              width={"100%"}
-              index={tabIndex}
-              onChange={handleTabsChange}
-            >
-              <TabList width={"100%"}>
-                {projects.map((item, id) => {
-                  return (
-                    <Tab
-                      key={id}
-                      width={"100%"}
-                      justifyContent={"start"}
-                      _selected={{ color: "white", bg: "#486284" }}
-                      rounded={"none"}
-                    >
-                      {item.name}
-                    </Tab>
-                  );
-                })}
-              </TabList>
-            </Tabs>
-          </section>
-        </>
-      ) : (
-        <></>
-      )} */}
       <section className="basis-4/5 grow min-h-screen pt-[150px] px-[120px]">
         <h1 className="text-[30px] text-[black]">
           {currentProject ? currentProject.name : "Select a project"}
@@ -403,6 +336,7 @@ const Calculator = () => {
               key={data.id}
               id={data.id}
               updateCalculatorData={updateCalculatorData}
+              removeCalculatorComponent={removeCalculatorComponent}
             />
           ))}
         </div>
@@ -443,16 +377,14 @@ const Calculator = () => {
           <></>
         )}
         <div className="w-full flex justify-center items-center">
-          <button
-            onClick={() =>
-              router.push(
-                "https://docs.google.com/spreadsheets/d/1ekFVsk9lgbHkvzQ97lD4woA8K89EkGIzB9Jakber2-0/edit?usp=sharing"
-              )
-            }
+          <Link
+            target="_blank"
+            href="https://docs.google.com/spreadsheets/d/1ekFVsk9lgbHkvzQ97lD4woA8K89EkGIzB9Jakber2-0/edit?usp=sharing"
+            rel="noopener noreferrer"
             className="bg-[#30514B] text-[white] px-[20px] py-[12px] font-bold rounded-[25px] mb-[50px]"
           >
             Try Forecast
-          </button>
+          </Link>
         </div>
       </section>
     </main>

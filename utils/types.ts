@@ -81,6 +81,7 @@ interface CalculatorComponentProps {
     id: string,
     newValues: Partial<CalculatorData>
   ) => void;
+  removeCalculatorComponent: (id: string) => void;
 }
 
 

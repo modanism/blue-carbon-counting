@@ -108,6 +108,7 @@ interface Values {
 const CalculatorComponent = ({
   id,
   updateCalculatorData,
+  removeCalculatorComponent,
 }: CalculatorComponentProps) => {
   const [isOwnSpecies, setIsOwnSpecies] = useState(false);
   const [selectedSpeciesName, setSelectedSpeciesName] = useState("");
@@ -183,6 +184,15 @@ const CalculatorComponent = ({
       <span className="h-[2px] w-full bg-[#30514B] my-[20px] rounded-full" />
 
       <div className="flex flex-col w-full mb-[30px]">
+        <div className="flex w-full justify-end">
+          <button
+            onClick={() => removeCalculatorComponent(id)}
+            className="bg-[red] text-[white] px-[20px] py-[12px] font-bold rounded-[25px] mb-[20px]"
+          >
+            Delete
+          </button>
+        </div>
+
         <div className="flex w-full justify-between">
           <div className="bg-[#314C47] w-[40%] py-[12px] px-[20px] rounded-[25px]">
             <div className="mb-[5px] flex justify-between items-center w-full">
