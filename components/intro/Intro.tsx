@@ -30,31 +30,31 @@ const Intro = () => {
         </p>
       </div>
       <div className="bg-[#EEEEEE]">
-        <div className="grid w-full relative grid-cols-3 place-items-center">
+        <div className="grid w-full relative grid-cols-3 place-items-center ">
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold my-[12px]">
               Species
             </h1>
-            <p className="flex text-center text-black h-[120px] font-[16px] justify-center items-center ">
+            <p className="flex text-center text-black h-[80px] font-[16px] justify-center items-start mb-[12px]">
               We provide you 5 species along with its complete variable data:
               Bruguiera gymnorhiza, Rhizophora apiculata, Rhizophora mucronata,
               Salix alba, Xylocarpus granatum
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold my-[12px]">
               Biomass
             </h1>
-            <p className="flex text-center text-black h-[120px] font-[16px] justify-center items-center ">
+            <p className="flex text-center text-black h-[80px] font-[16px] justify-center items-start mb-[12px]">
               Carbon stocks are calculated by the amount of carbon in the
               biomass and soil. There are 2 main sections; above and below.
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col justify-center items-center text-black text-[24px] font-[poppins] font-semibold my-[12px]">
               Area Density
             </h1>
-            <p className="flex text-center text-black h-[120px] font-[16px] justify-center items-center ">
+            <p className="flex text-center text-black h-[80px] font-[16px] justify-center items-start mb-[12px] ">
               The density of the mangrove area calculated consists of the number
               of trees and the area used for each species.
             </p>
@@ -66,49 +66,49 @@ const Intro = () => {
           </h1>{" "}
           <div className="w-[90%] border-b-2 border-color-[#90A3BF]"></div>
         </div>
-        <div className="grid grid-cols-5 w-full relative place-items-center mb-[28px]">
+        <div className="grid grid-cols-5 w-full relative place-items-center mb-[36px]">
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
               Diameter of breast height (D)
             </h1>
-            <p className="flex text-center text-black h-[140px] text-[16px] justify-center items-center">
+            <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               The diameter at breast height (DBH) is a standard measure of the
               size of a tree on a specific height above the ground.
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[20px] text-center font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
               Wood Density (ρ)
             </h1>
-            <p className="flex text-center text-black h-[140px] text-[16px] justify-center items-center">
+            <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               Mangrove wood density influenced by soil conditions and the
               specific adaptations of each mangrove species to its habitat.
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[20px] text-center font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
               Soil Depth (cm)
             </h1>
-            <p className="flex text-center text-black h-[140px] text-[14px] justify-center items-center">
+            <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               Mangroves store a significant amount of carbon, both aboveground
               and belowground, and the soil is a crucial component of this
               carbon storage.
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
               Bulk Density (g.cm^-3)
             </h1>
-            <p className="flex text-center text-black h-[140px] text-[16px] justify-center items-center">
+            <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               A measure of the mass of soil per unit volume. The dry mass of
               soil refers to the mass of the soil after removing water.
             </p>
           </div>
           <div className="col-span-1 px-[30px]">
-            <h1 className="flex flex-col justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold m-[15px]">
+            <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
               Organic Carbon Consentration (%)
             </h1>
-            <p className="flex text-center text-black h-[140px] text-[16px] justify-center items-center">
+            <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               Mangroves store a significant amount of carbon, both aboveground
               and belowground, and the soil is a crucial component of this
               carbon storage.

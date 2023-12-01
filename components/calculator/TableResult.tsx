@@ -135,39 +135,39 @@ const TableResult = () => {
 
   return (
     <>
-      <TableContainer w={'1000px'} bg={"#30514B"} marginBottom={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} marginBottom={"20px"} rounded={"12px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
-              <Th className="text-[#FAFAFA]">Species</Th>
-              <Th className="text-[#FAFAFA]">Surface Area</Th>
-              <Th className="text-[#FAFAFA]">Density</Th>
+              <Th className="text-center text-[#FAFAFA]">Species</Th>
+              <Th className="text-center text-[#FAFAFA]">Surface Area</Th>
+              <Th className="text-center text-[#FAFAFA]">Density</Th>
             </Tr>
           </Thead>
-          <Tbody>
+          <Tbody className="bg-[#F3F2F1] text-black">
             {tableData.map((e, index) => (
               <>
                 <Tr>
                   <Td key={index}>{e.speciesName}</Td>
-                  <Td key={index}>{e.area}</Td>
-                  <Td key={index}>{e.density}</Td>
+                  <Td key={index} className="text-center">{e.area}</Td>
+                  <Td key={index} className="text-center">{e.density}</Td>
                 </Tr>
               </>
             ))}
             <Tr>
-              <Td>Total</Td>
-              <Td>{totalArea}</Td>
-              <Td>{averageArea}</Td>
+              <Td className="font-bold">Total</Td>
+              <Td className="text-center">{totalArea}</Td>
+              <Td className="text-center">{averageArea}</Td>
             </Tr>
             <Tr>
-              <Td>Average</Td>
-              <Td>{totalDensity}</Td>
-              <Td>{averageDensity}</Td>
+              <Td className="font-bold">Average</Td>
+              <Td className="text-center">{totalDensity}</Td>
+              <Td className="text-center">{averageDensity}</Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -191,7 +191,7 @@ const TableResult = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"}>
+      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
