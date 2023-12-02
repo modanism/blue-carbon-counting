@@ -135,13 +135,20 @@ const TableResult = () => {
 
   return (
     <>
-      <TableContainer w={'1000px'} bg={"#30514B"} marginBottom={"20px"} rounded={"12px"}>
+      <TableContainer
+        w={"1000px"}
+        bg={"#30514B"}
+        marginBottom={"20px"}
+        rounded={"12px"}
+      >
         <Table variant="simple">
           <Thead>
-            <Tr>
-              <Th className="text-center text-[#FAFAFA]">Species</Th>
-              <Th className="text-center text-[#FAFAFA]">Surface Area</Th>
-              <Th className="text-center text-[#FAFAFA]">Density</Th>
+            <Tr >
+              <Th className="text-center text-[#FAFAFA] w-[333px]">Species</Th>
+              <Th className="text-center text-[#FAFAFA] w-[333px]">
+                Surface Area
+              </Th>
+              <Th className="text-center text-[#FAFAFA] w-[333px]">Density</Th>
             </Tr>
           </Thead>
           <Tbody className="bg-[#F3F2F1] text-black">
@@ -149,8 +156,12 @@ const TableResult = () => {
               <>
                 <Tr>
                   <Td key={index}>{e.speciesName}</Td>
-                  <Td key={index} className="text-center">{e.area}</Td>
-                  <Td key={index} className="text-center">{e.density}</Td>
+                  <Td key={index} className="text-center">
+                    {e.area}
+                  </Td>
+                  <Td key={index} className="text-center">
+                    {e.density}
+                  </Td>
                 </Tr>
               </>
             ))}
@@ -167,7 +178,7 @@ const TableResult = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
+      <TableContainer w={"1000px"} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
         <Table variant="simple">
           <Thead>
             <Tr>
@@ -191,7 +202,7 @@ const TableResult = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer w={'1000px'} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
+      <TableContainer w={"1000px"} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
         <Table variant="simple">
           <Thead>
             <Tr>

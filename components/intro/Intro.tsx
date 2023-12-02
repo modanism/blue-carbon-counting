@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import IntroSteps from "./IntroSteps";
 import Button from "../button/Button";
+import { poppins } from "@/app/layout";
 
 const Intro = () => {
   return (
@@ -17,7 +18,9 @@ const Intro = () => {
           className="flex flex-col w-80% relative justify-start items-center bg-[#F8EFD9] rounded-[20px]"
           style={{ marginBottom: "-2rem" }}
         >
-          <h1 className="text-black text-[44px] font-[poppins] py-[11px] px-[70px] ">
+          <h1
+            className={`text-black text-[44px] ${poppins.className} py-[11px] px-[70px] `}
+          >
             Welcome to Carbove, A Tool For Your Positive Impact
           </h1>
         </div>
@@ -117,7 +120,7 @@ const Intro = () => {
         </div>
       </div>
       <Tabs mb={"50px"}>
-        <TabList mb={"120px"}>
+        <TabList mb={"60px"}>
           <Tab
             width={"30vw"}
             color={"#1A202C"}

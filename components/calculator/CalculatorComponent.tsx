@@ -98,7 +98,6 @@ const speciesData = [
     carbonPercent: 45.99,
   },
 ];
- 
 
 const CalculatorComponent = ({
   id,
@@ -195,14 +194,12 @@ const CalculatorComponent = ({
                   <PopoverArrow bgColor={"#FFF0CA"} />
                   <PopoverBody bgColor={"#FFF0CA"} borderRadius={"15px"}>
                     <h1 className="text-[16px] text-[black] font-bold w-[170px] mb-[10px]">
-                      Carbon Stocks
+                      Species{" "}
                     </h1>
-                    <div className="flex justify-center items-center w-[170px] mb-[10px]">
-                      <Image src={CarbonStock} alt="carbon stocks" />
-                    </div>
                     <p className="text-[14px] text-[black] w-[170px]">
-                      Carbon stocks consist of above carbon stock, below carbon
-                      stock, and soil carbon stock.
+                      We provide 5 different species, complete with detailed
+                      data. If you have another species, you have the
+                      flexibility to add as much species as you need.
                     </p>
                   </PopoverBody>
                 </PopoverContent>
@@ -371,9 +368,60 @@ const CalculatorComponent = ({
           marginTop={"10px"}
         />
         <div className="flex flex-col gap-[5px] mb-[20px]">
-          <h1 className="text-[20px] text-[white] font-semibold">
-            Aboveground Biomass Formula
-          </h1>
+          <div className="w-full flex justify-between">
+            <h1 className="text-[20px] text-[white] font-semibold">
+              Aboveground Biomass Formula
+            </h1>
+            <Popover>
+              <PopoverTrigger>
+                <div className="select-none bg-[#FFF0CA] cursor-pointer flex justify-center items-center w-[24px] h-[24px] rounded-full text-[black] text-[16px] font-semibold">
+                  ?
+                </div>
+              </PopoverTrigger>
+              <PopoverContent borderRadius={"15px"} w={"220px"}>
+                <PopoverArrow bgColor={"#FFF0CA"} />
+                <PopoverBody bgColor={"#FFF0CA"} borderRadius={"15px"}>
+                  <h1 className="text-[16px] text-[black] font-bold mb-[10px]">
+                    Equations used (Above)
+                  </h1>
+                  <div className="px-[20px] mb-[10px]">
+                    <ul className="list-disc list-outside text-[11px] text-[black]">
+                      <li>
+                        The equations of 5 species provided will be filled
+                        automatically using the allometric equations.
+                      </li>
+                      <li>
+                        Equations of the species added manually will be filled
+                        automatically using the general equations.
+                      </li>
+                      <li>Check the box if you have your own equations.</li>
+                    </ul>
+                  </div>
+                  <h2 className="text-[11px] text-[#8A8787] text-center">
+                    Above Ground General Equation
+                  </h2>
+                  <div className="flex bg-[#FFFFFF] rounded-[50px] justify-center py-[5px] px-[18px] mb-[10px]">
+                    <p className="text-[#1D1D1D] text-[11px] font-bold">
+                      B = {aboveFormula.constant} x {aboveFormula.density} x{" "}
+                      {aboveFormula.diameter}
+                    </p>
+                    <p className="text-[#1D1D1D] text-[8px] font-bold">
+                      {aboveFormula.height}
+                    </p>
+                  </div>
+
+                  {/* <p className="text-[14px] text-[black] w-[170px]">
+                    &#8226;The equations of 5 species provided will be filled
+                    automatically using the allometric equations.Equations of
+                    the species added manually will be filled automatically
+                    using the general equations. Check the box if you have your
+                    own equations.
+                  </p> */}
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          </div>
+
           <div className="w-full flex items-center justify-center">
             <div className="flex bg-[#FFFFFF] rounded-[50px] justify-center py-[5px] px-[18px] mb-[10px]">
               <p className="text-[#1D1D1D] text-[16px] font-bold">
@@ -1092,7 +1140,7 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setSoilFormula((prev) => ({
                           ...prev,
-                          carbon: 0.764,
+                          carbon: 51.39,
                         }));
                       }
                     }}
