@@ -45,7 +45,7 @@ const speciesData = [
   {
     species: "R. apiculata",
     aboveConstant: 0.043,
-    aboveDensity: 0.843,
+    aboveDensity: 1,
     aboveDiameter: 6.657,
     aboveHeightPower: 2.63,
     belowConstant: 0.199,
@@ -59,7 +59,7 @@ const speciesData = [
   {
     species: "R. mucronata",
     aboveConstant: 0.1282,
-    aboveDensity: 0.814,
+    aboveDensity: 1,
     aboveDiameter: 7.021,
     aboveHeightPower: 2.6,
     belowConstant: 0.199,
@@ -351,7 +351,7 @@ const CalculatorComponent = ({
                       }}
                     />
                   </NumberInput>
-                  <p className="basis-1/4 w-fit text-center">m&sup2;</p>
+                  <p className="basis-1/4 w-fit text-center">ha</p>
                 </div>
               </div>
             </FormControl>
@@ -1079,78 +1079,30 @@ const CalculatorComponent = ({
                 Organic Carbon Consentration
               </h1>
               <div className="w-full flex justify-center items-center gap-[7px]">
-                {isOwnSpecies ? (
-                  <>
-                    <NumberInput
-                      max={100}
-                      className="bg-[#54706B] rounded-[25px]  p-0 w-[30%] text-[#FAFAFA] mt-[8px] mb-[10px]"
-                    >
-                      <NumberInputField
-                        onChange={(e) =>
-                          setSoilFormula((prev) => ({
-                            ...prev,
-                            carbon: Number(e.target.value),
-                          }))
-                        }
-                        className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]"
-                      />
-                    </NumberInput>
-                  </>
-                ) : soilFormula.ownCarbon ? (
-                  <>
-                    <NumberInput
-                      max={100}
-                      className="bg-[#54706B] rounded-[25px]  p-0 w-[30%] text-[#FAFAFA] mt-[8px] mb-[10px]"
-                    >
-                      <NumberInputField
-                        onChange={(e) =>
-                          setSoilFormula((prev) => ({
-                            ...prev,
-                            carbon: Number(e.target.value),
-                          }))
-                        }
-                        className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]"
-                      />
-                    </NumberInput>
-                  </>
-                ) : (
-                  <>
-                    <NumberInput
-                      isDisabled
-                      value={soilFormula.carbon}
-                      className="bg-[#54706B] rounded-[25px]  p-0 w-[30%] text-[#FAFAFA] mt-[8px] mb-[10px]"
-                    >
-                      <NumberInputField className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]" />
-                    </NumberInput>
-                  </>
-                )}
-                <p className="text-[12px] text-[#FAFAFA] font-bold">%</p>
-              </div>
-
-              {isOwnSpecies ? (
-                <></>
-              ) : (
-                <>
-                  <Checkbox
-                    onChange={(e) => {
-                      setSoilFormula((prev) => ({
-                        ...prev,
-                        ownCarbon: e.target.checked,
-                      }));
-                      if (!e.target.checked) {
+              <>
+                <div className="flex items-center gap-[5px] w-full justify-center">
+                  <NumberInput
+                    max={90}
+                    className="bg-[#54706B] rounded-[25px]  p-0 w-[25%] text-[#FAFAFA] mt-[8px] mb-[10px]"
+                  >
+                    <NumberInputField
+                      onChange={(e) =>
                         setSoilFormula((prev) => ({
                           ...prev,
-                          carbon: 51.39,
-                        }));
+                          depth: Number(e.target.value),
+                          bulk: getCorrespondingValue(Number(e.target.value)),
+                        }))
                       }
-                    }}
-                  >
-                    <p className="text-[11px] text-[#FAFAFA]">
-                      Fill your own number
-                    </p>
-                  </Checkbox>
-                </>
-              )}
+                      className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]"
+                    />
+                  </NumberInput>
+                  <p className="text-[12px] text-[#FAFAFA] font-bold">%</p>
+                </div>
+
+                <span className="h-[20px]" />
+              </>
+                
+              </div>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Result = () => {
   return (
-    <main className="flex min-h-screen flex-col gap-[50px] items-center justify-between px-[112px] bg-[#FFFFFF] pt-[150px]">
+    <main className="flex min-h-screen flex-col items-center justify-between px-[112px] bg-[#FFFFFF] pt-[150px]">
       <TableResult />
       <div className="w-full flex justify-center items-center">
         <Link

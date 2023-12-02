@@ -64,7 +64,6 @@ export const options = {
   plugins: {
     title: {
       display: true,
-      text: "Chart.js Bar Chart - Stacked",
     },
   },
   responsive: true,
@@ -135,100 +134,133 @@ const TableResult = () => {
 
   return (
     <>
+      <div>
+        <h1 className="text-black mb-[20px] text-poppins text-[20px] font-bold">
+          Table of Tress/Land Density
+        </h1>
+      </div>
       <TableContainer
         w={"1000px"}
         bg={"#30514B"}
-        marginBottom={"20px"}
+        marginBottom={"50px"}
         rounded={"12px"}
       >
         <Table variant="simple">
           <Thead>
             <Tr >
-              <Th className="text-center text-[#FAFAFA] w-[333px]">Species</Th>
-              <Th className="text-center text-[#FAFAFA] w-[333px]">
+              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">Species</Th>
+              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">
                 Surface Area
               </Th>
-              <Th className="text-center text-[#FAFAFA] w-[333px]">Density</Th>
+              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">Density</Th>
             </Tr>
           </Thead>
-          <Tbody className="bg-[#F3F2F1] text-black">
+          <Tbody className="bg-[#F3F2F1] text-black font-semibold">
             {tableData.map((e, index) => (
               <>
                 <Tr>
                   <Td key={index}>{e.speciesName}</Td>
                   <Td key={index} className="text-center">
-                    {e.area}
+                    {(e.area)}
                   </Td>
                   <Td key={index} className="text-center">
-                    {e.density}
+                    {(e.density).toFixed(2)}
                   </Td>
                 </Tr>
               </>
             ))}
             <Tr>
               <Td className="font-bold">Total</Td>
-              <Td className="text-center">{totalArea}</Td>
-              <Td className="text-center">{averageArea}</Td>
+              <Td className="text-center">{(totalArea)}</Td>
+              <Td className="text-center">{(totalDensity).toFixed(2)}</Td>
             </Tr>
             <Tr>
               <Td className="font-bold">Average</Td>
-              <Td className="text-center">{totalDensity}</Td>
-              <Td className="text-center">{averageDensity}</Td>
+              <Td className="text-center">{(averageArea)}</Td>
+              <Td className="text-center">{(averageDensity).toFixed(2)}</Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
-      <TableContainer w={"1000px"} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th className="text-[#FAFAFA]">Species</Th>
-              <Th className="text-[#FAFAFA]">AgB</Th>
-              <Th className="text-[#FAFAFA]">BgB</Th>
-              <Th className="text-[#FAFAFA]">Soil</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {tableData.map((e, index) => (
-              <>
-                <Tr>
-                  <Td key={index}>{e.speciesName}</Td>
-                  <Td key={index}>{e.AGB}</Td>
-                  <Td key={index}>{e.BGB}</Td>
-                  <Td key={index}>{e.Soil}</Td>
-                </Tr>
-              </>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <TableContainer w={"1000px"} bg={"#30514B"} mb={"20px"} rounded={"12px"}>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th className="text-[#FAFAFA]">Species</Th>
-              <Th className="text-[#FAFAFA]">AgC</Th>
-              <Th className="text-[#FAFAFA]">BgC</Th>
-              <Th className="text-[#FAFAFA]">Soil C</Th>
-              <Th className="text-[#FAFAFA]">Total</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {tableData.map((e, index) => (
-              <>
-                <Tr>
-                  <Td key={index}>{e.speciesName}</Td>
-                  <Td key={index}>{e.AGC}</Td>
-                  <Td key={index}>{e.BGC}</Td>
-                  <Td key={index}>{e.soilC}</Td>
-                  <Td key={index}>{e.Total}</Td>
-                </Tr>
-              </>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
-      <Bar options={options} data={chartData} />
+      <div>
+        <h1 className="text-black mb-[20px] text-poppins text-[20px] font-bold">
+          Table of Biomass
+        </h1>
+      </div>
+      <div className="mb-[50px]">
+        <TableContainer w={"1000px"} bg={"#30514B"} mb={"15px"} rounded={"12px"}>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">Species</Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">AgB</Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">BgB</Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium">Total</Th>
+              </Tr>
+            </Thead>
+            <Tbody className="bg-[#F3F2F1] text-black font-semibold">
+              {tableData.map((e, index) => (
+                <>
+                  <Tr>
+                    <Td key={index}>{e.speciesName}</Td>
+                    <Td key={index} className="text-center">{(e.AGB).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">{(e.BGB).toFixed(2)}</Td>
+                    <Td className="text-center">{(e.AGB+e.BGB).toFixed(2)}</Td>
+                  </Tr>
+                </>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <div>
+          <h1 className="text-black text-[12px] font-light">*AgB = Aboveground Biomass</h1>
+        </div>
+        <div>
+          <h1 className="text-black text-[12px] font-light">*BgB = Belowground Biomass</h1>
+        </div>
+      </div>
+      <div>
+        <h1 className="text-black mb-[20px] text-poppins text-[20px] font-bold">
+          Table of Carbon Stock
+        </h1>
+      </div>
+      <div>
+        <TableContainer w={"1000px"} bg={"#30514B"} mb={"15px"} rounded={"12px"}>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">Species</Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">AgC</Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">BgC</Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">Soil Carbon</Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium">Total</Th>
+              </Tr>
+            </Thead>
+            <Tbody className="bg-[#F3F2F1] text-black font-semibold">
+              {tableData.map((e, index) => (
+                <>
+                  <Tr>
+                    <Td key={index}>{e.speciesName}</Td>
+                    <Td key={index} className="text-center">{(e.AGC).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">{(e.BGC).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">{(e.soilC).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">{(e.Total).toFixed(2)}</Td>
+                  </Tr>
+                </>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+        <div>
+          <h1 className="text-black text-[12px] font-light">*AgB = Aboveground Carbon</h1>
+        </div>
+        <div>
+          <h1 className="text-black text-[12px] font-light">*BgB = Belowground Carbon</h1>
+        </div>
+      </div>
+      <div className="w-[1000px] h-[500px] mb-[50px]">
+        <Bar options={options} data={chartData} />
+      </div>          
     </>
   );
 };
