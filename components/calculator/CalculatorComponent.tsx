@@ -45,7 +45,7 @@ const speciesData = [
   {
     species: "R. apiculata",
     aboveConstant: 0.043,
-    aboveDensity: 0.843,
+    aboveDensity: 1,
     aboveDiameter: 6.657,
     aboveHeightPower: 2.63,
     belowConstant: 0.199,
@@ -59,7 +59,7 @@ const speciesData = [
   {
     species: "R. mucronata",
     aboveConstant: 0.1282,
-    aboveDensity: 0.814,
+    aboveDensity: 1,
     aboveDiameter: 7.021,
     aboveHeightPower: 2.6,
     belowConstant: 0.199,
@@ -87,7 +87,7 @@ const speciesData = [
   {
     species: "X. granatum",
     aboveConstant: 0.1832,
-    aboveDensity: 0.851,
+    aboveDensity: 1,
     aboveDiameter: 2.5,
     aboveHeightPower: 2.21,
     belowConstant: 0.199,
@@ -402,21 +402,10 @@ const CalculatorComponent = ({
                   </h2>
                   <div className="flex bg-[#FFFFFF] rounded-[50px] justify-center py-[5px] px-[18px] mb-[10px]">
                     <p className="text-[#1D1D1D] text-[11px] font-bold">
-                      B = {aboveFormula.constant} x {aboveFormula.density} x{" "}
-                      {aboveFormula.diameter}
+                      B = 0.251 x 0.764 x 10
                     </p>
-                    <p className="text-[#1D1D1D] text-[8px] font-bold">
-                      {aboveFormula.height}
-                    </p>
+                    <p className="text-[#1D1D1D] text-[8px] font-bold">2.63</p>
                   </div>
-
-                  {/* <p className="text-[14px] text-[black] w-[170px]">
-                    &#8226;The equations of 5 species provided will be filled
-                    automatically using the allometric equations.Equations of
-                    the species added manually will be filled automatically
-                    using the general equations. Check the box if you have your
-                    own equations.
-                  </p> */}
                 </PopoverBody>
               </PopoverContent>
             </Popover>
@@ -471,7 +460,7 @@ const CalculatorComponent = ({
                   if (!e.target.checked) {
                     setAboveFormula((prev) => ({
                       ...prev,
-                      constant: 0.251,
+                      constant: species.aboveConstant,
                     }));
                   }
                 }}
@@ -542,7 +531,7 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setAboveFormula((prev) => ({
                           ...prev,
-                          density: 0.764,
+                          density: species.aboveDensity,
                         }));
                       }
                     }}
@@ -652,8 +641,8 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setAboveFormula((prev) => ({
                           ...prev,
-                          diameter: 10,
-                          height: 2.63,
+                          diameter: species.aboveDiameter,
+                          height: species.aboveHeightPower,
                         }));
                       }
                     }}
@@ -673,9 +662,48 @@ const CalculatorComponent = ({
           marginBottom={"20px"}
         />
         <div className="flex flex-col gap-[5px] mb-[20px]">
-          <h1 className="text-[20px] text-[white] font-semibold">
-            Belowground Biomass Formula
-          </h1>
+          <div className="w-full flex justify-between">
+            <h1 className="text-[20px] text-[white] font-semibold">
+              Belowground Biomass Formula
+            </h1>
+            <Popover>
+              <PopoverTrigger>
+                <div className="select-none bg-[#FFF0CA] cursor-pointer flex justify-center items-center w-[24px] h-[24px] rounded-full text-[black] text-[16px] font-semibold">
+                  ?
+                </div>
+              </PopoverTrigger>
+              <PopoverContent borderRadius={"15px"} w={"220px"}>
+                <PopoverArrow bgColor={"#FFF0CA"} />
+                <PopoverBody bgColor={"#FFF0CA"} borderRadius={"15px"}>
+                  <h1 className="text-[16px] text-[black] font-bold mb-[10px]">
+                    Equations used (Below)
+                  </h1>
+                  <div className="px-[20px] mb-[10px]">
+                    <ul className="list-disc list-outside text-[11px] text-[black]">
+                      <li>
+                        The equations of the 5 species given or added manually
+                        will be filled automatically using the general
+                        equations.
+                      </li>
+                      <li>Check the box if you have your own equations.</li>
+                    </ul>
+                  </div>
+                  <h2 className="text-[11px] text-[#8A8787] text-center">
+                    Below Ground General Equation
+                  </h2>
+                  <div className="flex bg-[#FFFFFF] rounded-[50px] justify-center py-[5px] px-[18px] mb-[10px]">
+                    <p className="text-[#1D1D1D] text-[11px] font-bold">
+                      B = 0.199 x {"\u03C1"}
+                    </p>
+                    <p className="text-[#1D1D1D] text-[8px] font-bold">0.899</p>
+                    <p className="text-[#1D1D1D] text-[11px] font-bold">D</p>
+                    <p className="text-[#1D1D1D] text-[8px] font-bold">2.22</p>
+                  </div>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          </div>
+
           <div className="w-full flex items-center justify-center">
             <div className="flex bg-[#FFFFFF] rounded-[50px] justify-center py-[5px] px-[18px] mb-[10px]">
               <p className="text-[#1D1D1D] text-[16px] font-bold">
@@ -730,7 +758,7 @@ const CalculatorComponent = ({
                   if (!e.target.checked) {
                     setBelowFormula((prev) => ({
                       ...prev,
-                      constant: 0.199,
+                      constant: species.belowConstant,
                     }));
                   }
                 }}
@@ -840,7 +868,7 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setBelowFormula((prev) => ({
                           ...prev,
-                          density: 0.843,
+                          density: species.belowDensity,
                         }));
                       }
                     }}
@@ -950,8 +978,8 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setBelowFormula((prev) => ({
                           ...prev,
-                          diameter: 10,
-                          height: 2.32,
+                          diameter: species.belowDiameter,
+                          height: species.belowHeight,
                         }));
                       }
                     }}
@@ -1140,7 +1168,7 @@ const CalculatorComponent = ({
                       if (!e.target.checked) {
                         setSoilFormula((prev) => ({
                           ...prev,
-                          carbon: 51.39,
+                          carbon: species.carbonPercent,
                         }));
                       }
                     }}

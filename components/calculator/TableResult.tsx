@@ -62,10 +62,7 @@ type ResultProp = {
 
 export const options = {
   plugins: {
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart - Stacked",
-    },
+    
   },
   responsive: true,
   scales: {
@@ -168,12 +165,12 @@ const TableResult = () => {
             <Tr>
               <Td className="font-bold">Total</Td>
               <Td className="text-center">{totalArea}</Td>
-              <Td className="text-center">{averageArea}</Td>
+              <Td className="text-center">{totalDensity}</Td>
             </Tr>
             <Tr>
               <Td className="font-bold">Average</Td>
-              <Td className="text-center">{totalDensity}</Td>
-              <Td className="text-center">{averageDensity}</Td>
+              <Td className="text-center">{averageArea}</Td>
+              <Td className="text-center">{averageDensity}</Td> 
             </Tr>
           </Tbody>
         </Table>
@@ -228,6 +225,7 @@ const TableResult = () => {
           </Tbody>
         </Table>
       </TableContainer>
+      
       <Bar options={options} data={chartData} />
     </>
   );

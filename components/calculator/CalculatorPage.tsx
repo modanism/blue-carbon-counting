@@ -15,6 +15,7 @@ import CalculatorComponent from "@/components/calculator/CalculatorComponent";
 import { useRouter } from "next/navigation";
 import TableResult from "./TableResult";
 import Link from "next/link";
+import { useToast } from "@chakra-ui/react";
 
 let labels = ["January", "February", "March", "April", "May", "June", "July"];
 
@@ -58,6 +59,7 @@ const Calculator = () => {
   const [totalDensity, setTotalDensity] = useState(0);
   const [averageArea, setAverageArea] = useState(0);
   const [isCalc, setIsCalc] = useState(false);
+  const toast = useToast();
 
   const createNewCalculatorData = (): CalculatorData => {
     return {
@@ -121,6 +123,40 @@ const Calculator = () => {
   };
 
   const handleCalculate = () => {
+    let isEmptyOrZero = false;
+
+    calculatorData.forEach((calcData) => {
+      if (
+        !calcData.area.trees ||
+        !calcData.area.area ||
+        !calcData.aboveFormula.constant ||
+        !calcData.aboveFormula.density ||
+        !calcData.aboveFormula.diameter ||
+        !calcData.aboveFormula.height ||
+        !calcData.belowFormula.constant ||
+        !calcData.belowFormula.density ||
+        !calcData.belowFormula.densityPower ||
+        !calcData.belowFormula.diameter ||
+        !calcData.belowFormula.height ||
+        !calcData.soilFormula.depth ||
+        !calcData.soilFormula.bulk ||
+        !calcData.soilFormula.carbon
+      ) {
+        isEmptyOrZero = true;
+      }
+    });
+
+    if (isEmptyOrZero) {
+      toast({
+        title: "Oops!",
+        description: "Please make sure all fields are filled.",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
     console.log(calculatorData);
     const totalArea = calculatorData.reduce(
       (acc, curr) => acc + curr.area.area,
@@ -147,7 +183,7 @@ const Calculator = () => {
         Math.pow(
           Number(calcData.aboveFormula.diameter),
           Number(calcData.aboveFormula.height)
-        );
+        ) * 1000 / Number(calcData.area.area);
       const BGB =
         calcData.belowFormula.constant *
         Math.pow(
@@ -157,7 +193,8 @@ const Calculator = () => {
         Math.pow(
           Number(calcData.belowFormula.diameter),
           Number(calcData.belowFormula.height)
-        );
+        )  * 1000 / Number(calcData.area.area);
+        
       const Soil =
         calcData.soilFormula.depth *
         calcData.soilFormula.bulk *
@@ -196,7 +233,7 @@ const Calculator = () => {
         },
         {
           label: "BgBC",
-          data: speciesCalculations.map((e) => e.BGC),
+          data: speciesCalculations.map((e) => e.BGC ),
           backgroundColor: "#000000",
         },
         {
