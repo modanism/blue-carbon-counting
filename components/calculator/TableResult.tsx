@@ -260,7 +260,7 @@ const TableResult = () => {
       </div>
       <div className="w-[1000px] h-[500px] mb-[50px]">
         <Bar options={options} data={chartData} />
-      </div>          
+      </div>
     </>
   );
 };
