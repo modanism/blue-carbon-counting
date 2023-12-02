@@ -183,26 +183,25 @@ const Calculator = () => {
         Math.pow(
           Number(calcData.aboveFormula.diameter),
           Number(calcData.aboveFormula.height)
-        ) * 1000 / Number(calcData.area.area);
+        )*(calcData.area.trees / calcData.area.area)/1000;
       const BGB =
         calcData.belowFormula.constant *
         Math.pow(
           Number(calcData.belowFormula.density),
           Number(calcData.belowFormula.densityPower)
-        ) *
+        )*
         Math.pow(
           Number(calcData.belowFormula.diameter),
           Number(calcData.belowFormula.height)
-        )  * 1000 / Number(calcData.area.area);
-        
+        )*(calcData.area.trees / calcData.area.area)/1000;
       const Soil =
         calcData.soilFormula.depth *
         calcData.soilFormula.bulk *
-        (calcData.soilFormula.carbon / 100);
+        (calcData.soilFormula.carbon);
       const Total = AGB + BGB + Soil;
 
       const AGC = AGB * (calcData.soilFormula.carbon / 100);
-      const BGC = BGB * (calcData.soilFormula.carbon / 100);
+      const BGC = BGB * 0.39;
       const soilC = Soil;
 
       return {
@@ -233,7 +232,7 @@ const Calculator = () => {
         },
         {
           label: "BgBC",
-          data: speciesCalculations.map((e) => e.BGC ),
+          data: speciesCalculations.map((e) => e.BGC * -1),
           backgroundColor: "#000000",
         },
         {
