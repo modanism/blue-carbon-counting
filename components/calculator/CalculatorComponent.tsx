@@ -1107,29 +1107,24 @@ const CalculatorComponent = ({
                 Organic Carbon Consentration
               </h1>
               <div className="w-full flex justify-center items-center gap-[7px]">
-              <>
-                <div className="flex items-center gap-[5px] w-full justify-center">
-                  <NumberInput
-                    max={90}
-                    className="bg-[#54706B] rounded-[25px]  p-0 w-[25%] text-[#FAFAFA] mt-[8px] mb-[10px]"
-                  >
-                    <NumberInputField
-                      onChange={(e) =>
-                        setSoilFormula((prev) => ({
-                          ...prev,
-                          depth: Number(e.target.value),
-                          bulk: getCorrespondingValue(Number(e.target.value)),
-                        }))
-                      }
-                      className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]"
-                    />
-                  </NumberInput>
-                  <p className="text-[12px] text-[#FAFAFA] font-bold">%</p>
-                </div>
+                <>
+                  <div className="flex items-center gap-[5px] w-full justify-center">
+                    <NumberInput className="bg-[#54706B] rounded-[25px]  p-0 w-[25%] text-[#FAFAFA] mt-[8px] mb-[10px]">
+                      <NumberInputField
+                        onChange={(e) =>
+                          setSoilFormula((prev) => ({
+                            ...prev,
+                            carbon: Number(e.target.value),
+                          }))
+                        }
+                        className="h-[28px] rounded-[25px] text-center px-[10px] py-[2px]"
+                      />
+                    </NumberInput>
+                    <p className="text-[12px] text-[#FAFAFA] font-bold">%</p>
+                  </div>
 
-                <span className="h-[20px]" />
-              </>
-
+                  <span className="h-[20px]" />
+                </>
               </div>
             </div>
           </div>
