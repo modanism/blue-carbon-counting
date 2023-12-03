@@ -209,6 +209,12 @@ const CalculatorComponent = ({
             <div>
               {isOwnSpecies ? (
                 <Input
+                  onChange={(e) => {
+                    setSpecies((prev) => ({
+                      ...prev,
+                      species: e.target.value,
+                    }));
+                  }}
                   placeholder="Your own species"
                   className="bg-[#FAFAFA] rounded-[12px] text-[#585656] mb-[10px] mt-[8px]"
                 />
