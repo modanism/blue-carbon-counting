@@ -147,12 +147,16 @@ const TableResult = () => {
       >
         <Table variant="simple">
           <Thead>
-            <Tr >
-              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">Species</Th>
+            <Tr>
+              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">
+                Species
+              </Th>
               <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">
                 Surface Area
               </Th>
-              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">Density</Th>
+              <Th className="text-center text-[#FAFAFA] w-[333px] text-[16px] font-medium normal-case">
+                Density
+              </Th>
             </Tr>
           </Thead>
           <Tbody className="bg-[#F3F2F1] text-black font-semibold">
@@ -161,23 +165,23 @@ const TableResult = () => {
                 <Tr>
                   <Td key={index}>{e.speciesName}</Td>
                   <Td key={index} className="text-center">
-                    {(e.area)}
+                    {e.area}
                   </Td>
                   <Td key={index} className="text-center">
-                    {(e.density).toFixed(2)}
+                    {e.density.toFixed(2)}
                   </Td>
                 </Tr>
               </>
             ))}
-            <Tr>
+            <Tr className="bg-[#D9D9D9]">
               <Td className="font-bold">Total</Td>
-              <Td className="text-center">{(totalArea)}</Td>
-              <Td className="text-center">{(totalDensity).toFixed(2)}</Td>
+              <Td className="text-center">{totalArea}</Td>
+              <Td className="text-center">{totalDensity.toFixed(2)}</Td>
             </Tr>
-            <Tr>
+            <Tr className="bg-[#D9D9D9]">
               <Td className="font-bold">Average</Td>
-              <Td className="text-center">{(averageArea)}</Td>
-              <Td className="text-center">{(averageDensity).toFixed(2)}</Td>
+              <Td className="text-center">{averageArea}</Td>
+              <Td className="text-center">{averageDensity.toFixed(2)}</Td>
             </Tr>
           </Tbody>
         </Table>
@@ -188,14 +192,27 @@ const TableResult = () => {
         </h1>
       </div>
       <div className="mb-[50px]">
-        <TableContainer w={"1000px"} bg={"#30514B"} mb={"15px"} rounded={"12px"}>
+        <TableContainer
+          w={"1000px"}
+          bg={"#30514B"}
+          mb={"15px"}
+          rounded={"12px"}
+        >
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">Species</Th>
-                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">AgB</Th>
-                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">BgB</Th>
-                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium">Total</Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">
+                  Species
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">
+                  AgB
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium normal-case">
+                  BgB
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[250px] text-[16px] font-medium">
+                  Total
+                </Th>
               </Tr>
             </Thead>
             <Tbody className="bg-[#F3F2F1] text-black font-semibold">
@@ -203,20 +220,54 @@ const TableResult = () => {
                 <>
                   <Tr>
                     <Td key={index}>{e.speciesName}</Td>
-                    <Td key={index} className="text-center">{(e.AGB).toFixed(2)}</Td>
-                    <Td key={index} className="text-center">{(e.BGB).toFixed(2)}</Td>
-                    <Td className="text-center">{(e.AGB+e.BGB).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">
+                      {e.AGB.toFixed(2)}
+                    </Td>
+                    <Td key={index} className="text-center">
+                      {e.BGB.toFixed(2)}
+                    </Td>
+                    <Td className="text-center">
+                      {(e.AGB + e.BGB).toFixed(2)}
+                    </Td>
                   </Tr>
                 </>
               ))}
+              <Tr className="bg-[#D9D9D9]">
+                <Td>Total</Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.AGB;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.BGB;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.AGB + currentData.BGB;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
         <div>
-          <h1 className="text-black text-[12px] font-light">*AgB = Aboveground Biomass</h1>
+          <h1 className="text-black text-[12px] font-light">
+            *AgB = Aboveground Biomass
+          </h1>
         </div>
         <div>
-          <h1 className="text-black text-[12px] font-light">*BgB = Belowground Biomass</h1>
+          <h1 className="text-black text-[12px] font-light">
+            *BgB = Belowground Biomass
+          </h1>
         </div>
       </div>
       <div>
@@ -225,15 +276,30 @@ const TableResult = () => {
         </h1>
       </div>
       <div>
-        <TableContainer w={"1000px"} bg={"#30514B"} mb={"15px"} rounded={"12px"}>
+        <TableContainer
+          w={"1000px"}
+          bg={"#30514B"}
+          mb={"15px"}
+          rounded={"12px"}
+        >
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">Species</Th>
-                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">AgC</Th>
-                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">BgC</Th>
-                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">Soil Carbon</Th>
-                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium">Total</Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">
+                  Species
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">
+                  AgC
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">
+                  BgC
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium normal-case">
+                  Soil Carbon
+                </Th>
+                <Th className="text-center text-[#FAFAFA] w-[166.5px] text-[16px] font-medium">
+                  Total
+                </Th>
               </Tr>
             </Thead>
             <Tbody className="bg-[#F3F2F1] text-black font-semibold">
@@ -241,21 +307,64 @@ const TableResult = () => {
                 <>
                   <Tr>
                     <Td key={index}>{e.speciesName}</Td>
-                    <Td key={index} className="text-center">{(e.AGC).toFixed(2)}</Td>
-                    <Td key={index} className="text-center">{(e.BGC).toFixed(2)}</Td>
-                    <Td key={index} className="text-center">{(e.soilC).toFixed(2)}</Td>
-                    <Td key={index} className="text-center">{(e.Total).toFixed(2)}</Td>
+                    <Td key={index} className="text-center">
+                      {e.AGC.toFixed(2)}
+                    </Td>
+                    <Td key={index} className="text-center">
+                      {e.BGC.toFixed(2)}
+                    </Td>
+                    <Td key={index} className="text-center">
+                      {e.soilC.toFixed(2)}
+                    </Td>
+                    <Td key={index} className="text-center">
+                      {e.Total.toFixed(2)}
+                    </Td>
                   </Tr>
                 </>
               ))}
+              <Tr className="bg-[#D9D9D9]">
+                <Td>Total</Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.AGC;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.BGC;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.soilC;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {tableData
+                    .reduce((total, currentData) => {
+                      return total + currentData.Total;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
         <div>
-          <h1 className="text-black text-[12px] font-light">*AgB = Aboveground Carbon</h1>
+          <h1 className="text-black text-[12px] font-light">
+            *AgB = Aboveground Carbon
+          </h1>
         </div>
         <div>
-          <h1 className="text-black text-[12px] font-light">*BgB = Belowground Carbon</h1>
+          <h1 className="text-black text-[12px] font-light">
+            *BgB = Belowground Carbon
+          </h1>
         </div>
       </div>
       <div className="w-[1000px] h-[500px] mb-[50px]">

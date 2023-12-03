@@ -83,10 +83,18 @@ const TableForecast = () => {
   return (
     <>
       <div className="flex flex-col">
+        <div className="flex w-full justify-center gap-[10px] items-center mb-[25px]">
+          <h1 className="text-[20px] font-bold text-[#020202] font-poppins">
+            Forecasting
+          </h1>
+          <div className="px-[10px] border-[#314C47] border-[1px] rounded-full text-[16px] text-[#30514B]">
+            BETA
+          </div>
+        </div>
         {tableData.map((data, index) => (
           <>
-            <div className="flex flex-col gap-[30px]">
-              <h1 className="text-[black] text-[24px] font-poppins">
+            <div className="flex flex-col">
+              <h1 className="text-[black] text-[24px] font-poppins mb-[10px]">
                 {data.speciesName}
               </h1>
               <TableContainer
@@ -245,7 +253,7 @@ const TableForecast = () => {
                         {forecastData[index].soilcX3.toFixed(3)}
                       </Td>
                     </Tr>
-                    <Tr>
+                    <Tr className="bg-[#D9D9D9] font-bold">
                       <Td className="font-bold">Total Carbon Stock</Td>
                       <Td className="text-center">
                         {(data.AGC + data.BGC + data.soilC).toFixed(3)}
@@ -370,6 +378,37 @@ const TableForecast = () => {
                   <Td className="text-center">{data.carbonX3.toFixed(3)}</Td>
                 </Tr>
               ))}
+              <Tr className="bg-[#D9D9D9] font-bold">
+                <Td className="font-bold">Total</Td>
+                <Td className="text-center">
+                  {resultData
+                    .reduce((total, currentData) => {
+                      return total + currentData.carbonX;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {resultData
+                    .reduce((total, currentData) => {
+                      return total + currentData.carbonX1;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {resultData
+                    .reduce((total, currentData) => {
+                      return total + currentData.carbonX2;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+                <Td className="text-center">
+                  {resultData
+                    .reduce((total, currentData) => {
+                      return total + currentData.carbonX3;
+                    }, 0)
+                    .toFixed(2)}
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
