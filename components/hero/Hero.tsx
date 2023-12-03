@@ -14,7 +14,7 @@ const Hero = () => {
           Make Waves in The Fight Against Climate Change
         </h1>
         <p className="text-neutral-7 text-[20px] font-[400] text-center mb-[100px] text-white w-[1080px]">
-          Mangroves can become sources of carbon emissions, posing a potential threat to our world. Join us in calculating mangroves hidden carbon emissions and mitigating their impact on our global climate..{" "}
+          Mangroves can become sources of carbon emissions, posing a potential threat to our world. Join us in calculating mangroves hidden carbon emissions and mitigating their impact on our global climate.{" "}
         </p>
         <Button isThin={false} dest="/calculator" text="Explore" isAnimate={true} bgColor={"!bg-neutral-15"}/>
       </section>

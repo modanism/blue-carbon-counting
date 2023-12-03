@@ -72,7 +72,7 @@ const Intro = () => {
         <div className="grid grid-cols-5 w-full relative place-items-center mb-[36px]">
           <div className="col-span-1 px-[30px]">
             <h1 className="flex flex-col h-[50px] justify-center items-center text-black text-[18px] text-center font-[poppins] font-semibold my-[12px]">
-              Diameter of breast height (D)
+              Diameter at breast height (D)
             </h1>
             <p className="flex text-center text-black h-[100px] text-[14px] justify-center items-start">
               The diameter at breast height (DBH) is a standard measure of the
