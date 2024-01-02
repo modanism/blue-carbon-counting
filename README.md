@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## CARBOVE [https://blue-carbon-counting.vercel.app/](https://blue-carbon-counting.vercel.app/)
+
+A blue carbon calculator website that can help to count hidden carbon stock in mangroves, along with education and forecast features.
 
 ## Getting Started
 
